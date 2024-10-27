@@ -10,5 +10,9 @@ public class Main {
     System.out.println(dog.name);
     System.out.println(dog.age);
     System.out.println(dog.type);
+    Puppy pup = new Puppy("Tom's baby",1,"Dog");
+    System.out.println(pup.name);
+    System.out.println(pup.age);
+    System.out.println(pup.type);
     }
 }
