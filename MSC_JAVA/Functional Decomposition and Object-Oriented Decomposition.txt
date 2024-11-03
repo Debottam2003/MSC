@@ -1,0 +1,49 @@
+Functional Decomposition
+
+    Concept: Functional decomposition breaks down complex functions or tasks into smaller,
+     manageable functions. This approach emphasizes what the program does rather than the 
+     data it operates on. It’s common in procedural programming.
+    Example in OOP: In Java, a complex process like calculating 
+    payroll can be broken down into smaller methods like calculateBasePay(), 
+    calculateOvertime(), and applyDeductions().
+    In Java: Although Java is OOP-centric, functional decomposition 
+    can still be used for individual methods within a class to simplify complex logic.
+
+    class Payroll {
+        double calculatePayroll(Employee employee) {
+            double basePay = calculateBasePay(employee);
+            double overtimePay = calculateOvertime(employee);
+            return basePay + overtimePay - applyDeductions(employee);
+        }
+
+        double calculateBasePay(Employee employee) { /* implementation */ }
+        double calculateOvertime(Employee employee) { /* implementation */ }
+        double applyDeductions(Employee employee) { /* implementation */ }
+    }
+
+Object-Oriented Decomposition
+
+    Concept: Object-oriented decomposition structures the program around the objects representing real-world 
+    entities and focuses on their interactions and responsibilities. It’s aligned with the OOP principles of 
+    encapsulation, abstraction, inheritance, and polymorphism.
+    Example in OOP: For a library management system, instead of breaking down functions, you’d break down 
+    entities into objects like Book, LibraryMember, and Librarian, each with its attributes and methods.
+    In Java: This is implemented by creating classes and defining the interactions between them, often using inheritance and interfaces.
+
+class Book {
+    String title;
+    String author;
+    // Methods related to Book
+}
+
+class LibraryMember {
+    String memberId;
+    void borrowBook(Book book) { /* implementation */ }
+    void returnBook(Book book) { /* implementation */ }
+}
+
+Summary in OOP and Java Context
+
+In OOP and Java, these decomposition methods and inheritance techniques help developers create structured,
+ efficient, and easy-to-maintain code. While functional decomposition can still be useful for modular methods,
+  object-oriented decomposition is generally more aligned with Java's philosophy, promoting reusable and encapsulated components.
