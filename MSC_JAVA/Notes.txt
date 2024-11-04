@@ -1,0 +1,8 @@
+Coupling and Cohesion
+Cohesion, refers to how closely related and focused the responsibilities
+of a single module or class are.High Cohesion means a class or module performs
+a single task or a group of related tasks, which makes the system easier to maintain and understand.
+
+Coupling, refers to the degree of direct knowledge one class has about another.
+Low coupling is preferred as it means changes in one module are less likely to affect others,
+prompting independence and easier maintainance.
