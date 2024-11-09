@@ -16,3 +16,14 @@ Modularity and Hierarchy
     Hierarchy involves organizing modules or classes into layers where higher-level 
     classes use lower-level classes. Common forms of hierarchy in OOP include inheritance 
     hierarchies where classes are arranged in parent-child relationships.
+
+Garbage Collection: 
+        In coding the process of automatically identifying and 
+        freeing up memory that is no longer in use by a program.It's crucial
+        aspect of memory management, helping prevent memory leaks
+        (where unused memory is not released) and improving overall performance.
+
+        Garbage collection primarily deals with dynamic memory allocation, 
+        where memory is allocated at runtime. When objects or data are created, 
+        memory is allocated. Once they’re no longer needed, garbage collection 
+        identifies them and reclaims their memory.
