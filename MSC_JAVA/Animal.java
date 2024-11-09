@@ -5,6 +5,9 @@ public class Animal {
           this.type = type;
           this.age = age;
     }
+    public void bark(){
+        
+    }
     public void eat(){
         System.out.println("Animal is eating");
     }
