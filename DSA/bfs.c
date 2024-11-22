@@ -27,8 +27,10 @@ int main(){
     printf("Enter the number of vertices: ");
     scanf("%d",&v);
     int arr[v][v];
+	int visited[v];
     int i,j;
     for(i = 0; i < v; i++){
+		visited[i] = 0;
         for(j = 0; j < v; j++){
             arr[i][j] = 0;
         }
@@ -48,7 +50,6 @@ int main(){
         }
         printf("\n");
     }
-	int visited[4] = {0,0,0,0};
 	int start = 3;
 	int index;
 	visited[start] = 1;
