@@ -39,7 +39,7 @@ int main(){
     for(i = 0; i < e; i++){
        printf("Enter the end vertices for the %dth edge:",i+1);
        scanf("%d%d",&v1,&v2);
-       arr[v1][v2] = arr[v2][v1] = 1;
+       arr[v1][v2] = 1;
     }
 
     for(i = 0; i < v; i++){
@@ -49,11 +49,11 @@ int main(){
         printf("\n");
     }
 	int visited[4] = {0,0,0,0};
-	int start = 3;
+	int start = 5;
 	int index;
 	visited[start] = 1;
 	enqueue(start);
-	printf("...BFS Tree...\n");
+    printf("...BFS Tree...\n");
 	while(empty() != 1){
 		int p = queue[front];
 		printf("%d->",p);
