@@ -50,7 +50,7 @@ int main(){
         }
         printf("\n");
     }
-	int start = 5;
+	int start = 0;
 	int index;
 	visited[start] = 1;
 	enqueue(start);
