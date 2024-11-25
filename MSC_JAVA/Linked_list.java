@@ -6,15 +6,17 @@ public class Linked_list{
     l1.createnode(40);
     l1.createnode(30);
     //Node l2 = new Node();
-    l1.display();
-    l1.scale(3);
+    //l1.display();
+    //l1.scale(3);
     Node l2 = new Node();
     l2.createnode(15);
     l2.createnode(25);
     l2.createnode(11);
-    l2.display();
-    l2.scale(4);
+    l2.createnode(11);
+    //l2.display();
+    //l2.scale(4);
     l1.display();
     l2.display();
+    Node.add(l1, l2);
     }
 }

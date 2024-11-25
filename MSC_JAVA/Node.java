@@ -40,4 +40,26 @@ public class Node {
         }
         System.out.println("Null");
     }
+    public static void add(Node l1, Node l2){
+           Node a = l1.head;
+           Node b = l2.head;
+           Node temp = new Node();
+           while(a != null && b != null){
+            if(temp.head == null){
+                Node c = new Node(a.data + b.data,null);
+                temp.head = c;
+            }
+            else{
+                Node prev = temp.head;
+                while(prev.next != null){
+                    prev = prev.next;
+                }
+                Node c = new Node(a.data + b.data,null);
+                prev.next = c;
+            }
+            a = a.next;
+            b = b.next;
+           }
+           temp.display();
+    }
 }
