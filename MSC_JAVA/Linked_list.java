@@ -18,5 +18,7 @@ public class Linked_list{
     l1.display();
     l2.display();
     Node.add(l1, l2);
+    Node.sub(l1, l2);
+    Node.multiply(l1, l2);
     }
 }
