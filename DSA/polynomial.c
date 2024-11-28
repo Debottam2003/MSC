@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include<math.h>
+// addition function
 void add(int a[], int b[]){
      int i;
      int c[10];
@@ -14,6 +15,7 @@ void add(int a[], int b[]){
     }
     printf("\n");    
 }
+// difference function
 void sub(int a[], int b[]){
      int i;
      int c[10];
@@ -28,6 +30,7 @@ void sub(int a[], int b[]){
     }
     printf("\n");  
 }
+// multiplication function
 void multiply(int a[], int b[]){
      int i,j;
      int c[7] = {0};
@@ -44,6 +47,7 @@ void multiply(int a[], int b[]){
     }
     printf("\n"); 
 }
+//evaluate function
 void evaluate(int a[],int val){
     int res = 0,i;
     for(i = 0; i < 4; i++){
@@ -52,6 +56,7 @@ void evaluate(int a[],int val){
     printf("f(%d): %d",val,res);
 }
 int main() {
+    //polynomial creation
     int a[10] = {1, 2, 3, 1}, b[10] = {2, 3, 4, 2};
     int i;
     for (i = 0; i < 4; i++) {
