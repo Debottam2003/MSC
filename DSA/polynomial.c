@@ -54,8 +54,6 @@ void evaluate(int a[],int val){
 int main() {
     int a[10] = {1, 2, 3, 1}, b[10] = {2, 3, 4, 2};
     int i;
-
-    // Print the first polynomial
     for (i = 0; i < 4; i++) {
         printf("%dx^%d", a[i], i);
         if (i < 3) {
@@ -63,8 +61,6 @@ int main() {
         }
     }
     printf("\n");
-
-    // Print the second polynomial
     for (i = 0; i < 4; i++) {
         printf("%dx^%d", b[i], i);
         if (i < 3) {
