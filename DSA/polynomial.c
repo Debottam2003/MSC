@@ -72,6 +72,7 @@ int main() {
             printf(" + ");
         }
     }
+    //function calls
     printf("\n");
     add(a,b);
     sub(a,b);
