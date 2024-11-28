@@ -4,9 +4,11 @@ public class Dog extends Animal {
        super(type,age);
        this.name = name;
     }
+    @Override
     public void eat(){
         System.out.println("Dog is eating");
     }
+    @Override
     public void bark() {
         System.out.println("The dog is barking");
         eat();
