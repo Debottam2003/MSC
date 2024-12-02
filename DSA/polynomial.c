@@ -55,6 +55,19 @@ void evaluate(int a[],int val){
     }
     printf("f(%d): %d",val,res);
 }
+void derivative(int a[]){
+    int c[4] = {0},i;
+    for(i = 0; i < 4; i++){
+        c[i] = a[i + 1] * (i + 1);
+    }
+    printf("\n");
+    for (i = 0; i < 3; i++) {
+        printf("%dx^%d", c[i], i);
+        if (i < 2) {
+            printf(" + ");
+        }
+    }
+}
 int main() {
     //polynomial creation
     int a[10] = {1, 2, 3, 1}, b[10] = {2, 3, 4, 2};
@@ -78,5 +91,6 @@ int main() {
     sub(a,b);
     multiply(a,b);
     evaluate(a,2);
+    derivative(a);
     return 0;
 }
