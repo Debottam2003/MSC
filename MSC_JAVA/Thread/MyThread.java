@@ -7,7 +7,8 @@ public class MyThread {
         Mt t1 = new Mt("tag 1");
         t1.start();
         Mt2 t2 = new Mt2();
-        t2.start();
+        Thread t = new Thread(t2);
+        t.start();
         Mt t3 = new Mt("tag 2");
         t1.join();
         t3.start();

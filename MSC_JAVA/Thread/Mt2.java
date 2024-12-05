@@ -1,4 +1,4 @@
-public class Mt2 extends Thread {
+public class Mt2 implements Runnable{
     @Override
     public void run() {
         while (true) {
