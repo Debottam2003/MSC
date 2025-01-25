@@ -8,10 +8,13 @@ int main()
     // Taking the dimension of the matrices
     printf("Enter the number of rows of matrix A:\n");
     scanf("%d", &m);
+
     printf("Enter the number of columns of matrix A:\n");
     scanf("%d", &n);
+
     printf("Enter the number of rows of matrix B:\n");
     scanf("%d", &p);
+    
     printf("Enter the number of columns of matrix B:\n");
     scanf("%d", &q);
 
