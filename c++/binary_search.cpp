@@ -14,6 +14,7 @@ int main(){
 		mid = (first + last) / 2;
 		cout << mid << endl;
 		if(item == arr[mid]){
+			cout << mid << endl;
 			flag = 1;
 			break;
 		}
