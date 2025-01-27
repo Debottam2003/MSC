@@ -7,12 +7,12 @@ int main(){
 	int arr[] = {2,3,5,7,8,9,10,13};
 	int first = 0;
 	int last = sizeof(arr) / sizeof(arr[0]) - 1;
-	int item = 8;
+	int item = 10;
 	int mid  = 0;
 	int flag = 0;
 	while(first <= last){
 		mid = (first + last) / 2;
-		cout << mid << endl;
+		//cout << mid << endl;
 		if(item == arr[mid]){
 			cout << mid << endl;
 			flag = 1;
