@@ -12,7 +12,7 @@ int main(){
 	int flag = 0;
 	while(first <= last){
 		mid = (first + last) / 2;
-		cout << mid <<endl;
+		cout << mid << endl;
 		if(item == arr[mid]){
 			flag = 1;
 			break;
