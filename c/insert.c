@@ -3,7 +3,7 @@
 int length(int arr[]) {
     int count = 0;
     while(arr[count] != 9999){
-        count++;
+        count += 1;
     } 
     return count;
 }
