@@ -18,6 +18,9 @@ void dequeue(){
 	if(front > rear || front == -1){
 		front = rear = -1;
 	}
+	if(front > rear){
+		front = rear = -1;
+	}
 	else{
 		front++;
 	}	
