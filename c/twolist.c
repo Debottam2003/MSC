@@ -112,7 +112,7 @@ int main()
     head2 = create(head2, -1);
     head2 = create(head2, 3);
     printf("Second list: ");
-    print(head2);
+    print(head2);  
     printf("\n");
     struct node *addresult = add(head1, head2);
     printf("The addision result of the two polynomials is:");
