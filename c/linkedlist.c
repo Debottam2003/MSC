@@ -19,10 +19,10 @@ void display();
 
 int main() {
     // Insert elements into the linked list
-    // insertEnd(50);
-    // insertEnd(10);
-    // insertBegin(23);
-    // insertEnd(22);
+    insertEnd(50);
+    insertEnd(10);
+    insertBegin(23);
+    insertEnd(22);
     insertSort(10);
     insertSort(23);
     insertSort(22);
