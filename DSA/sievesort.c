@@ -1,23 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 struct node
 {
     int data;
     struct node *next;
 };
-struct node *arr[10];
-struct node *head = NULL;
-struct node *insert(int data)
+
+struct node *insert(struct node *head, int data)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = data;
     newnode->next = NULL;
+
     if (head == NULL)
     {
-        newnode->next = head;
-        head = newnode;
-        return head;
+        return newnode;
     }
+
     struct node *temp = head;
     while (temp->next != NULL)
     {
@@ -26,26 +26,53 @@ struct node *insert(int data)
     temp->next = newnode;
     return head;
 }
+
 int main()
 {
-    for (int i = 0; i < 5; i++)
+    int list[] = {7, 8, 9, 2, 3, 5, 21, 10, 13};
+    int n = sizeof(list) / sizeof(list[0]);
+
+    struct node **arr = (struct node **)malloc(n * sizeof(struct node *));
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < 5; j++)
-        {
-            insert(10 * (j + 1));
-        }
-        arr[i] = head;
-        head = NULL;
+        arr[i] = NULL;
     }
-    for (int i = 0; i < 5; i++)
+
+    int p = 0;
+    int inserted = 0;
+    arr[p] = insert(NULL, list[0]);
+
+    for (int i = 1; i < n; i++)
     {
-        struct node *prev = arr[i];
-        while (prev != NULL)
+        inserted = 0;
+        for (int j = 0; j <= p; j++)
         {
-            printf("%2d->", prev->data);
-            prev = prev->next;
+            if (arr[j]->data > list[i])
+            {
+                arr[j] = insert(arr[j], list[i]);
+                inserted = 1;
+                break;
+            }
+        }
+        if (!inserted)
+        {
+            p++;
+            arr[p] = insert(NULL, list[i]);
+        }
+    }
+
+    // Printing the list
+    printf("Sieve sorted linked lists:\n");
+    for (int i = 0; i < n; i++)
+    {
+        struct node *temp = arr[i];
+        while (temp != NULL)
+        {
+            printf("%2d -> ", temp->data);
+            temp = temp->next;
         }
         printf("NULL\n");
     }
+
     return 0;
 }

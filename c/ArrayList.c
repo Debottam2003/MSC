@@ -37,6 +37,7 @@ int main()
         arr[i] = head;
         head = NULL;
     }
+    // Printing the arrayList
     for (int i = 0; i < 5; i++)
     {
         struct node *prev = arr[i];
