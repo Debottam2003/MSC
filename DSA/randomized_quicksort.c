@@ -13,7 +13,7 @@ int partition(int arr[], int low, int high)
     int random_index = low + rand() % ((high - low) + 1);
     if (random_index != high) {
         swap(&arr[random_index], &arr[high]);
-        different_swaps++;  // Count the pivot swap
+        different_swaps++;  // Count the pivot swap when it is not the last element that is counted as different swap
     }
     int pivot = arr[high];
     int i = low - 1;
@@ -53,7 +53,7 @@ void quicksort(int arr[], int low, int high)
 }
 int main()
 {
-    // Just randomized the pivot element
+    // Randomized the pivot element
     srand(time(0));
     int n;
     printf("Enter the no of elements: ");
