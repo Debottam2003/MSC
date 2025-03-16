@@ -124,11 +124,117 @@ pivot = 2
  [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ] [ 7 ] [ 8 ] [ 9 ]
  Final Sequence: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
-
-
-        
-
-
+----------------
+---Graph Sort---
+----------------
+6 4 1 9 5 8 3 7 2
+_ _ _ _ _ _ _ _ _  
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[2]1 -> 9
+     -> 5
+     -> 8
+     -> 3
+     -> 7
+     -> 2
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[6]3 -> 7
+[7]7 -> NULL
+[8]2 -> NULL
+6, 4, 1 are source verticies
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 1 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[6]3 -> 7
+[7]7 -> NULL
+[7]2 -> NULL
+6, 4, 3, 2 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 2 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[6]3 -> 7
+[7]7 -> NULL
+6, 4, 3 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 3 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[7]7 -> NULL
+6, 4 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 4 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[7]7 -> NULL
+6, 5 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 5 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[3]9 -> NULL
+[5]8 -> NULL
+[7]7 -> NULL
+6 is source vertex
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 6 here
+[3]9 -> NULL
+[5]8 -> NULL
+[7]7 -> NULL
+9, 8, 7 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 7 here
+[3]9 -> NULL
+[5]8 -> NULL        
+9, 8 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 8 here
+[3]9 -> NULL
+9 is source vertex
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 9 here
 
 
 
