@@ -70,14 +70,14 @@ pivot = 2
   6 4 1 9 5 8 3 7 [ 2 ]
   swap occur
   1 4 6 9 5 8 3 7 [ 2 ]
-  swap occur, and 1st iteration ends here
+  swap occur, Pivot placed correctly, and 1st iteration ends here
   1 2 6 9 5 8 3 7 [ 4 ]
     /               \
   [ 1 ] | [ 2 ] | [ 6 9 5 8 3 7 4]
   6 9 5 8 3 7 [ 4 ]
   swap occur
   3 9 5 8 6 7 [ 4 ]
-  swap occur, and 2nd iteration ends here
+  swap occur, Pivot placed correctly, and 2nd iteration ends here
   3 4 5 8 6 7 [ 9 ] 
     /             \
   [ 3 ] | [ 4 ] | [ 5 8 6 7 9 ]
@@ -92,7 +92,7 @@ pivot = 2
   same swap    
   5 8 6 7 [ 9 ]
        i,j
-  same swap occur, and 3rd iteration ends here
+  same swap occur, Pivot placed correctly, and 3rd iteration ends here
   5 8 6 7 [ 9 ] 
     /         \  
 [ 5 8 6 7] | [ 9 ]
@@ -102,7 +102,7 @@ pivot = 2
  5 8 6 [ 7 ]
  swap
  5 6 8 [ 7 ]
- swap occur, and 4th iteration ends here
+ swap occur, Pivot placed correctly, and 4th iteration ends here
  5 6 7 [ 8 ]
   /        \
  [5 6 7] | [ 8 ]
@@ -111,19 +111,18 @@ pivot = 2
  5 6 [ 7 ]
  same swap
  5 6 [ 7 ]
- swap occur, and 5th iteration ends here
+ swap occur, Pivot placed correctly, and 5th iteration ends here
  5 6 [ 7 ]
    /     \
  [ 5 6 ] | [ 7 ]
  5 [ 6 ]
  same swap
- swap occur, and 6th iteration ends here
+ swap occur, Pivot placed correctly, and 6th iteration ends here
  5 [ 6 ]
  /
  [ 5 ]
  [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ] [ 7 ] [ 8 ] [ 9 ]
  Final Sequence: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-
 
 
 
