@@ -1,0 +1,57 @@
+Sorting
+Given sequence: 6 4 1 9 5 8 3 7 2
+
+-----------------
+---Bubble Sort---
+-----------------
+Iteration 1:
+4 1 6 5 8 3 7 2 [ 9 ] max number gets the correct position
+Iteration 2:
+1 4 5 6 3 7 2 [ 8 9 ] 2nd max number gets the correct position
+Iteration 3:
+1 4 5 3 6 2 [ 7 8 9 ] 3rd max number gets the correct position
+Iteration 4:
+1 4 3 5 2 [ 6 7 8 9 ] 4th max number gets the correct position
+Iteration 5:
+1 3 4 2 [ 5 6 7 8 9 ] 5th max number gets the correct position
+Iteration 6:
+1 3 2 [ 4 5 6 7 8 9 ] 6th max number gets the correct position
+Iteration 7:
+1 2 [ 3 4 5 6 7 8 9 ] 7th max number gets the correct position
+Iteration 8:
+1 [ 2 3 4 5 6 7 8 9 ] 8th max number gets the correct position
+Iteration 9:
+[ 1 2 3 4 5 6 7 8 9 ] 9th max number gets the correct position
+Sorted Sequence is: 1 2 3 4 5 6 7 8 9
+
+--------------------
+---Selection Sort---
+--------------------
+Find the minimum value in each iteration and place it in the correct position
+Iteration1: [ 1 ] 4 6 9 5 8 3 7 2
+Iteration2: [ 1 2 ] 6 9 5 8 3 7 4
+Iteration3: [ 1 2 3 ] 9 5 8 6 7 4
+Iteration4: [ 1 2 3 4 ] 5 8 6 7 9
+Iteration5: [ 1 2 3 4 5 ] 8 6 7 9
+Iteration6: [ 1 2 3 4 5 6 ] 8 7 9
+Iteration7: [ 1 2 3 4 5 6 7 ] 8 9
+Iteration8: [ 1 2 3 4 5 6 7 8 ] 9
+Iteration9: [ 1 2 3 4 5 6 7 8 9 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
