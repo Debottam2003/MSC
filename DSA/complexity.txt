@@ -1,49 +1,49 @@
-Time complexity is a way to express the efficiency of an algorithm in terms of how its runtime or number of operations grows with the input size, \( n \). Here’s an overview of common time complexities:
+Time complexity is a way to express the efficiency of an algorithm in terms of how its runtime or number of operations grows with the input size, n. Here’s an overview of common time complexities:
 
-### 1. Constant Time – \( O(1) \)
+### 1. Constant Time – O(1)
 
 - **Definition**: The algorithm takes the same amount of time regardless of the input size.
 - **Example**: Accessing a specific element in an array by index.
 
-### 2. Logarithmic Time – \( O(\log n) \)
+### 2. Logarithmic Time – O(log n)
 
 - **Definition**: The algorithm reduces the problem size by a constant factor at each step, typically halving the input size.
 - **Example**: Binary search in a sorted array.
 
-### 3. Linear Time – \( O(n) \)
+### 3. Linear Time – O(n)
 
 - **Definition**: The runtime grows proportionally with the input size.
 - **Example**: Traversing an array or list once to find a specific value.
 
-### 4. Linearithmic Time – \( O(n \log n) \)
+### 4. Linearithmic Time – O(n log n)
 
-- **Definition**: Common in efficient sorting algorithms, this complexity indicates the algorithm performs a \( \log n \) operation for each element.
+- **Definition**: Common in efficient sorting algorithms, this complexity indicates the algorithm performs a log n operation for each element.
 - **Example**: Merge sort, quicksort (average case), and heapsort.
 
-### 5. Quadratic Time – \( O(n^2) \)
+### 5. Quadratic Time – O(n^2)
 
 - **Definition**: The runtime grows proportionally to the square of the input size, often seen in algorithms with nested loops over the input.
 - **Example**: Bubble sort, insertion sort, or selection sort (on average and worst cases).
 
-### 6. Cubic Time – \( O(n^3) \)
+### 6. Cubic Time – O(n^3)
 
 - **Definition**: The runtime grows proportionally to the cube of the input size, common in algorithms with three nested loops.
 - **Example**: Certain dynamic programming algorithms, such as calculating matrix chain multiplication.
 
-### 7. Exponential Time – \( O(2^n) \)
+### 7. Exponential Time – O(2^n)
 
 - **Definition**: The runtime doubles with each additional input size, which quickly becomes infeasible for even moderately large inputs.
 - **Example**: Solving the traveling salesman problem with brute force, recursive algorithms for subsets.
 
-### 8. Factorial Time – \( O(n!) \)
+### 8. Factorial Time – O(n!)
 
 - **Definition**: The algorithm considers every possible permutation, making it impractical for even relatively small inputs.
 - **Example**: Generating all permutations of a set, brute-force solutions for the traveling salesman problem.
 
 ### Visual Summary of Growth Rates
 
-- **Fastest**: \( O(1) \) → \( O(\log n) \) → \( O(n) \)
-- **Medium**: \( O(n \log n) \) → \( O(n^2) \)
-- **Slowest**: \( O(2^n) \) → \( O(n!) \)
+- **Fastest**: O(1) → O(log n) → O(n)
+- **Medium**: O(n log n) → O(n^2)
+- **Slowest**: O(2^n) → O(n!)
 
 Each time complexity has an ideal application based on the problem size and performance constraints.
