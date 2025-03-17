@@ -9,7 +9,7 @@ int main()
 	scanf("%d", &n);
 	int a[n], final[n], c = 0;
 	// Taking input of the sequence elements
-	printf("Emnter the values : ");
+	printf("Enter the values : ");
 	for (int i = 0; i < n; i++)
 	{
 		scanf("%d", &a[i]);
