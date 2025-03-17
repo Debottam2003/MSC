@@ -52,5 +52,5 @@ int main(){
     printf("Enter the second string: ");
     scanf("%s", b);
     lcs(a, b, strlen(a),  strlen(b));
-    return 0;
+    return 0; 
 }
