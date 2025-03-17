@@ -1,36 +1,41 @@
 #include <stdio.h>
 #include <math.h>
 
-long long int power(int base, int exp) {
+long long int power(int base, int exp)
+{
     long long int result = 1;
-    for (int i = 0; i < exp; i++) {
+    for (int i = 0; i < exp; i++)
+    {
         result *= base;
     }
     return result;
 }
 
-long long int karatsuba(long long int a, long long int b) {
-    if (a < 10 || b < 10) {
+long long int karatsuba(long long int a, long long int b)
+{
+    if (a < 10 || b < 10)
+    {
         return a * b;
     }
 
     long long int len_a = 0, len_b = 0, num;
 
     num = a;
-    while (num != 0) {
+    while (num != 0)
+    {
         num /= 10;
         len_a++;
     }
 
     num = b;
-    while (num != 0) {
+    while (num != 0)
+    {
         num /= 10;
         len_b++;
     }
 
     long long int n = (len_a > len_b) ? len_a : len_b;
     long long int half = (n / 2);
-
     long long int power_10_half = power(10, half);
 
     long long int p = a / power_10_half;
@@ -45,7 +50,8 @@ long long int karatsuba(long long int a, long long int b) {
     return ac * power_10_half * power_10_half + ad_plus_bc * power_10_half + bd;
 }
 
-int main() {
+int main()
+{
     printf("This is the Karatsuba algorithm...\n");
     long long int a, b;
     printf("Enter the first number: ");

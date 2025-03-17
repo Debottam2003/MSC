@@ -1,0 +1,245 @@
+Sorting
+Given sequence: 6 4 1 9 5 8 3 7 2
+
+-----------------
+---Bubble Sort---
+-----------------
+Iteration 1:
+4 1 6 5 8 3 7 2 [ 9 ] max number gets the correct position
+Iteration 2:
+1 4 5 6 3 7 2 [ 8 9 ] 2nd max number gets the correct position
+Iteration 3:
+1 4 5 3 6 2 [ 7 8 9 ] 3rd max number gets the correct position
+Iteration 4:
+1 4 3 5 2 [ 6 7 8 9 ] 4th max number gets the correct position
+Iteration 5:
+1 3 4 2 [ 5 6 7 8 9 ] 5th max number gets the correct position
+Iteration 6:
+1 3 2 [ 4 5 6 7 8 9 ] 6th max number gets the correct position
+Iteration 7:
+1 2 [ 3 4 5 6 7 8 9 ] 7th max number gets the correct position
+Iteration 8:
+1 [ 2 3 4 5 6 7 8 9 ] 8th max number gets the correct position
+Iteration 9:
+[ 1 2 3 4 5 6 7 8 9 ] 9th max number gets the correct position
+Sorted Sequence is: 1 2 3 4 5 6 7 8 9
+
+--------------------
+---Selection Sort---
+--------------------
+Find the minimum value in each iteration and place it in the correct position
+Iteration1: [ 1 ] 4 6 9 5 8 3 7 2
+Iteration2: [ 1 2 ] 6 9 5 8 3 7 4
+Iteration3: [ 1 2 3 ] 9 5 8 6 7 4
+Iteration4: [ 1 2 3 4 ] 5 8 6 7 9
+Iteration5: [ 1 2 3 4 5 ] 8 6 7 9
+Iteration6: [ 1 2 3 4 5 6 ] 8 7 9
+Iteration7: [ 1 2 3 4 5 6 7 ] 8 9
+Iteration8: [ 1 2 3 4 5 6 7 8 ] 9
+Iteration9: [ 1 2 3 4 5 6 7 8 9 ]
+
+--------------------
+---Insertion Sort---
+--------------------
+6 4 1 9 5 8 3 7 2
+Iteration1: 4 6 [ 4 came ]
+Iteration2: 1 4 6 [ 1 came ]
+Iteration3: 1 4 6 9 [ 9 came ]
+Iteration4: 1 4 5 6 9 [ 5 came ]
+Iteartion5: 1 4 5 6 8 9 [ 8 came ]
+Iteration6: 1 3 4 5 6 8 9 [ 3 came ]
+Iteration7: 1 3 4 5 6 7 8 9 [ 7 came ]
+Iteration8: 1 2 3 4 5 6 7 8 9 [ 2 came ]
+
+----------------
+---Sieve Sort---
+----------------
+          6 4 1 9 5 8 3 7 2
+             /         \
+6->4->1->5->3->2      9->8->7
+  /  |   |  \          / | \
+2->1 3 5->4  6         7 8 9
+ /\  |  /\   |         | | |
+1  2 3 4  5  6         7 8 9
+    8 7 5 3 1 2 4 6 9 (Worst Case Time Complexity will occur here)
+
+----------------
+---Quick Sort---
+----------------
+pivot = 2
+  6 4 1 9 5 8 3 7 [ 2 ]
+  swap occur
+  1 4 6 9 5 8 3 7 [ 2 ]
+  swap occur, Pivot placed correctly, and 1st iteration ends here
+  1 2 6 9 5 8 3 7 [ 4 ]
+    /               \
+  [ 1 ] | [ 2 ] | [ 6 9 5 8 3 7 4]
+  6 9 5 8 3 7 [ 4 ]
+  swap occur
+  3 9 5 8 6 7 [ 4 ]
+  swap occur, Pivot placed correctly, and 2nd iteration ends here
+  3 4 5 8 6 7 [ 9 ] 
+    /             \
+  [ 3 ] | [ 4 ] | [ 5 8 6 7 9 ]
+  5 8 6 7 [ 9 ]
+ i,j
+  same swap
+  5 8 6 7 [ 9 ]
+   i,j
+  same swap 
+  5 8 6 7 [ 9 ]
+     i,j
+  same swap    
+  5 8 6 7 [ 9 ]
+       i,j
+  same swap occur, Pivot placed correctly, and 3rd iteration ends here
+  5 8 6 7 [ 9 ] 
+    /         \  
+[ 5 8 6 7] | [ 9 ]
+  5 8 6 [ 7 ]
+ i,j
+ same swap
+ 5 8 6 [ 7 ]
+ swap
+ 5 6 8 [ 7 ]
+ swap occur, Pivot placed correctly, and 4th iteration ends here
+ 5 6 7 [ 8 ]
+  /        \
+ [5 6 7] | [ 8 ]
+ 5 6 [ 7 ]
+ same swap
+ 5 6 [ 7 ]
+ same swap
+ 5 6 [ 7 ]
+ swap occur, Pivot placed correctly, and 5th iteration ends here
+ 5 6 [ 7 ]
+   /     \
+ [ 5 6 ] | [ 7 ]
+ 5 [ 6 ]
+ same swap
+ swap occur, Pivot placed correctly, and 6th iteration ends here
+ 5 [ 6 ]
+ /
+ [ 5 ]
+ [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ] [ 7 ] [ 8 ] [ 9 ]
+ Final Sequence: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+----------------
+---Graph Sort---
+----------------
+6 4 1 9 5 8 3 7 2
+_ _ _ _ _ _ _ _ _
+0 1 2 3 4 5 6 7 8  
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[2]1 -> 9
+     -> 5
+     -> 8
+     -> 3
+     -> 7
+     -> 2
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[6]3 -> 7
+[7]7 -> NULL
+[8]2 -> NULL
+6, 4, 1 are source verticies
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 1 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[6]3 -> 7
+[7]7 -> NULL
+[7]2 -> NULL
+6, 4, 3, 2 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 2 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[6]3 -> 7
+[7]7 -> NULL
+6, 4, 3 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 3 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[1]4 -> 9
+     -> 5
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[7]7 -> NULL
+6, 4 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 4 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[3]9 -> NULL
+[4]5 -> 8
+     -> 7
+[5]8 -> NULL
+[7]7 -> NULL
+6, 5 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 5 here
+[0]6 -> 9
+     -> 8
+     -> 7
+[3]9 -> NULL
+[5]8 -> NULL
+[7]7 -> NULL
+6 is source vertex
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 6 here
+[3]9 -> NULL
+[5]8 -> NULL
+[7]7 -> NULL
+9, 8, 7 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 7 here
+[3]9 -> NULL
+[5]8 -> NULL        
+9, 8 are source verticies 
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 8 here
+[3]9 -> NULL
+9 is source vertex
+Following our algorithm highest index valued 
+vertex will be removed from the graph that is 9 here
+The sorted sequence is: 1 2 3 4 5 6 7 8 9
+
+----------------
+---Heap Sort---
+----------------
+6 4 1 9 5 8 3 7 2
+
