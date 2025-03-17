@@ -1,4 +1,5 @@
-Time complexity is a way to express the efficiency of an algorithm in terms of how its runtime or number of operations grows with the input size, n. Here’s an overview of common time complexities:
+Time complexity is a way to express the efficiency of an algorithm in terms of how its runtime or 
+number of operations grows with the input size, n. Here’s an overview of common time complexities:
 
 1. Constant Time – O(1)
 
