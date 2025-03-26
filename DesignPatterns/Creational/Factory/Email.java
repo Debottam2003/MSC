@@ -13,7 +13,7 @@ public class Email implements Notifications {
 
     @Override
     public String toString() {
-        return "This is a Email type Notification...";
+        return "This is a Email type Notification...*";
     }
 
 }
