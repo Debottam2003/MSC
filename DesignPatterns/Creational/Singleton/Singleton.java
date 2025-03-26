@@ -1,7 +1,7 @@
 package DesignPatterns.Creational.Singleton;
 
 public class Singleton {
-    private static Singleton instance = null;
+    protected static Singleton instance = null;
     protected String user;
     protected String host;
     protected String password;
