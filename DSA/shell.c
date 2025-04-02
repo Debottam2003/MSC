@@ -10,7 +10,7 @@ int main()
     {
         scanf("%d", &arr[i]);
     }
-    printf("\nEnter the Starting iteration no(>0): ");
+    printf("\nEnter the Starting iteration no(>0) and less than %d: ", n);
     scanf("%d", &start);
     while (start > 1)
     {
