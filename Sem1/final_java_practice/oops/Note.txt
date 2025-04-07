@@ -1,0 +1,12 @@
+Four pillars of oop is
+1.Encapsulation
+2.Abstraction
+3.Inheritance
+  a.Single Inheritance
+  b.Multilevel Inheritance
+  c.Hierarchical Inheritance
+  d.Multilevel Inheritance
+4.Polymorphism
+  a.Compile time polimorphism
+  b.Run time polymorphism
+5.Interface
