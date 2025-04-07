@@ -7,7 +7,7 @@ public class File implements Composite{
     }
     @Override
     public void operation() {
-        System.out.println("This is the " + this.name + "folder");
+        System.out.println("This is the " + this.name + "file");
     }
     @Override
     public String getName() {
