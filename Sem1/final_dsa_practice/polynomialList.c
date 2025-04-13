@@ -68,16 +68,16 @@ struct node *sub(struct node *a, struct node *b)
 // differentiate
 struct node *differentiate(struct node *head)
 {
-    head = head->next;
-    struct node *temp = head;
+    struct node *temp = head->next;
     int degree = 1;
+    struct node *res = NULL;
     while (temp != NULL)
     {
-        temp->data *= degree;
+        res = create(res, temp->data * degree);
         temp = temp->next;
         degree++;
     }
-    return head;
+    return res;
 }
 struct node *insertAt(struct node *head, int data, int position)
 {
@@ -154,13 +154,15 @@ int main()
     }
     display(head1);
     display(head2);
-    // struct node *resAdd = add(head1, head2);
-    // display(resAdd);
-    // struct node *resSub = sub(head1, head2);
-    // display(resSub);
-    // struct node *resDiff = differentiate(head1);
-    // display(resDiff);
+    struct node *resAdd = add(head1, head2);
+    display(resAdd);
+    struct node *resSub = sub(head1, head2);
+    display(resSub);
+    struct node *resDiff = differentiate(head1);
+    display(resDiff);
     struct node *resMul = multiply(head1, head2);
+    display(head1);
+    display(head2);
     display(resMul);
     return 0;
 }
