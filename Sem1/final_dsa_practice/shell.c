@@ -29,7 +29,7 @@ int main()
         }
     }
     int i, j, temp;
-    for (i = 1; i < 5; i++)
+    for (i = 1; i < 9; i++)
     {
         j = i - 1;
         temp = arr[i];

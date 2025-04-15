@@ -29,7 +29,7 @@ struct node *insert(struct node *head, int data)
 
 int main()
 {
-    int list[] = {7, 8, 9, 2, 3, 5, 21, 10, 13};
+    int list[] = {6, 4, 1, 9, 5, 8, 3, 7, 2};
     int n = sizeof(list) / sizeof(list[0]);
 
     struct node **arr = (struct node **)malloc(n * sizeof(struct node *));
