@@ -54,6 +54,6 @@ int main() {
     for(int i = 0 ; i < n; i++){
         printf("%2d", arr[i]);
     }
-    printf("No of comparions: %d", comparisons);
+    printf("\nNo of comparions: %d", comparisons);
     return 0;
 }
