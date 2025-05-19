@@ -1,0 +1,104 @@
+Stages of C Compilation (under the hood):
+1. Preprocessing
+
+    Command: gcc -E main.c -o main.i
+
+    Job: Handles directives like #include, #define, and #ifdef.
+
+    What it does:
+
+        Inserts contents of included header files (e.g., <stdio.h>).
+
+        Replaces macros and constants.
+
+        Removes comments.
+
+    Output: main.i – a "pure C" file with all preprocessing done.
+
+Example:
+#include <stdio.h>
+#define PI 3.14
+
+int main() {
+    printf("%f", PI);
+}
+
+Becomes:
+int main() {
+    printf("%f", 3.14);
+}
+
+2. Compilation
+
+    Command: gcc -S main.i -o main.s
+
+    Job: Converts the preprocessed C code into assembly code.
+
+    What it does:
+
+        Performs syntax and semantic checks.
+
+        Translates high-level constructs to low-level instructions.
+
+    Output: main.s – a file containing assembly instructions for your CPU.
+
+3. Assembly
+
+    Command: gcc -c main.s -o main.o
+
+    Job: Translates assembly code to machine code (object code).
+
+    What it does:
+
+        Converts each assembly instruction to binary opcodes.
+
+        Creates an object file (.o) that contains machine code but is not executable yet.
+
+    Output: main.o – object file.
+
+4. Linking
+
+    Command: gcc main.o -o main
+
+    Job: Combines your object file(s) and required libraries to produce a final executable.
+
+    What it does:
+
+        Resolves external references (e.g., printf() from libc).
+
+        Adds startup code (crt0.o), standard libraries, and runtime.
+
+        Assigns final memory addresses to functions and variables.
+
+    Output: main – the final executable file.
+
+🔁 Full Compilation Pipeline
+
+When you run: gcc main.c -o main
+ 
+It internally runs:
+gcc -E main.c -o main.i         # Preprocessing
+gcc -S main.i -o main.s         # Compilation to Assembly
+gcc -c main.s -o main.o         # Assembling to Object File
+gcc main.o -o main              # Linking to Executable
+
+⚙️ What Happens When You Run the Executable
+
+When you run ./main:
+
+    The OS loads your binary into memory.
+
+    It sets up the stack and heap.
+
+    Calls the main() function.
+
+    After main() returns, it hands control back to the OS.
+
+🧠 Summary
+| Stage         | Input    | Output   | Role                           |
+| ------------- | -------- | -------- | ------------------------------ |
+| Preprocessing | `main.c` | `main.i` | Handles `#includes` & macros   |
+| Compilation   | `main.i` | `main.s` | Converts C to Assembly         |
+| Assembly      | `main.s` | `main.o` | Converts Assembly to Binary    |
+| Linking       | `main.o` | `main`   | Combines and builds executable |
+
