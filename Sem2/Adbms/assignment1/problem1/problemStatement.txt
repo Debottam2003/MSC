@@ -1,0 +1,21 @@
+(i) You have to draw a use-case diagram for the
+following problems using an appropriate tool.
+
+(ii) Develop a SRS document for the following
+problems. (Only the Functional Requirements).
+
+(iii) Design the conceptual level design for the following
+problems using Entity relationship diagram. Also design the equivalent
+relational schema.
+
+Problem #1:
+The restaurant
+maintains catalog for the list of food and beverage items that provides. The
+restaurant takes online order also for providing food facility at their own
+premises.  Orders on phone are also
+entertained. There are delivery boys/ girls and each of them is assigned a
+specific area code. The delivery boy/girl cannot deliver outside the area to
+which he (she) is assigned. Customer records are maintained so premium customer
+can be offered discount. Each transaction i.e order (delivery etc.) with date,
+time, payment mode, payment details needs to be recorded for necessary report
+generation.
