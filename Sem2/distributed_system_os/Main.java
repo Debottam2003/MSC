@@ -1,10 +1,8 @@
-package Sem2.distributed_system_os;
-
+package distributed_system_os;
 /**
  * @author Debottam Kar
  * @problem Reaching all nodes of a connected Graph
  */
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -50,7 +48,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Reaching all nodes of a connected Graph!");
-        String filePath = "./sem2/distributed_system_os/input.txt";
+        String filePath = "./Sem2/distributed_system_os/input.txt";
         String data = "";
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
