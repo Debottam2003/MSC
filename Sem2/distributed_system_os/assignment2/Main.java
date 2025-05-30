@@ -50,9 +50,9 @@ public class Main implements Runnable{
             }
         }
 
-        waitForReply();
+        this.waitForReply();
 
-        enterCriticalSection();
+        this.enterCriticalSection();
 
     }
 
@@ -123,7 +123,7 @@ public class Main implements Runnable{
 
     private void exitCriticalSection() {
         synchronized(this) {
-        System.out.println("Process" + this.pid + " Exiting Critical Section");
+        System.out.println("Process " + this.pid + " Exiting Critical Section");
         this.state = State.RELEASED;
         for(Integer pid : this.deferredReplies) {
             this.sendReply(pid);
@@ -140,8 +140,8 @@ public class Main implements Runnable{
             processes.add(new Main(i, n, processes));
         }
 
-        for(Main pi : processes) {
-            new Thread(pi).start();
+        for(Main process : processes) {
+            new Thread(process).start();
         }
     }
 }
