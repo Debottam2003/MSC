@@ -1,0 +1,25 @@
+...Many to many to Entity relationship...
+table1 (pk1, _, _, _) (n) <-> table2 (pk2, _, _, _) (n)
+
+The Relational(table) Schema will be using a junction
+table where table1 (pk1, _, _, _) and table2 (pk2, _, _, _)
+and a table3 that is junction table with the Schema
+(pk3, fk1(pk1 references table1), fk2(pk2 references table2))
+
+...One to many to Entity relationship...
+table1 (pk1, _, _, _) (1) <-> table2 (pk2, _, _, _) (n)
+
+The Relational Schema will be using the table1 (pk1, _, _, _)
+and table2 (pk2, _, _, _, fk1(pk1 references table1))
+
+...One to many to Entity relationship...
+table1 (pk1, _, _, _) (1) <-> table2 (pk2, _, _, _) (1)
+
+The Relational Schema will be using the table1 (pk1, _, _, _)
+and table2 (pk2, _, _, _, fk1(pk1 references table1)) or
+table1 (pk1, _, _, _, fk1(pk2 references table2)) and table2 (pk2, _, _, _,)
+If there is total and partial participation then it is a good practice to avoid 
+null values that relationship holding column/attribute is kept in the table/relation
+that is in the total participation and the foreign key will be not null
+
+
