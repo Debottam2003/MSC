@@ -91,6 +91,10 @@ struct node *insertAt(struct node *head, int data, int position)
     }
     struct node *temp = head;
     struct node *prev = NULL;
+    if(position == 0) {
+        head->data += data;
+        return head;
+    }
     while (temp != NULL && position > 0)
     {
         position--;
@@ -99,7 +103,7 @@ struct node *insertAt(struct node *head, int data, int position)
     }
     if (temp != NULL && position == 0)
     {
-        newnode->data = newnode->data + data;
+        temp->data = temp->data + data;
     }
     else
     {
