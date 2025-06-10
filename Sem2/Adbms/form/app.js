@@ -23,9 +23,12 @@ console.log(__dirname);
 const app = express();
 
 app.use(cors());
+
 // Parses the json Data
+// Middleware to parse application/json
 app.use(express.json({ extended: true }));
 // Pareses the urlencoded Data
+// Middleware to parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
 // Server Rendered Form
