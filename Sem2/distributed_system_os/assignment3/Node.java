@@ -94,6 +94,7 @@ public class Node implements Runnable {
             p_queue.clear();
             this.enterCS();
         } else {
+            System.out.println(this.p_id + " Forwards the token which is came for " + node.p_id);
             this.next_hop.receiveResponse(node, p_queue);
         }
     }
@@ -120,7 +121,7 @@ public class Node implements Runnable {
                 System.out.println(n.p_id);
             }
             Node node = this.p_queue.poll();
-            System.out.println("Forwards the token for: " + node.p_id + " to the next hop");
+            System.out.println(this.p_id + " Forwards the token for: " + node.p_id + " to the next hop");
             this.p_hold = false;
             this.next_hop.receiveResponse(node, new LinkedList<>(this.p_queue));
             this.p_queue.clear();
