@@ -23,7 +23,7 @@ public class Node implements Runnable {
             this.enterCS();
         } else {
             try {
-                Thread.sleep(new Random().nextInt(2000));
+                Thread.sleep(new Random().nextInt(9000));
                 // Requests for critical section
                 this.requestCS();
             } catch (Exception e) {
@@ -104,7 +104,7 @@ public class Node implements Runnable {
         try {
             System.out.println(this.p_id + " Enters critical section.");
             this.in_cs = "locked";
-            Thread.sleep(4000);
+            Thread.sleep(2000);
             this.exitCS();
         } catch (Exception e) {
             System.out.println(e.getMessage());
