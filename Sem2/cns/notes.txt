@@ -1,0 +1,32 @@
+Cryptography
+------------
+
+The transformation of plain text to cipher text and cipher text to plain text back.
+
+Types:
+1. Symetric Key : Both encription and decription is done by a single key 🔑.
+2. Asymetric Key : Encryption and decryption is done by two different keys 🔑 + 🗝️.
+
+Key Terms: Key, Plain text, Cipher text, Cipher, Cryptography, Cryptanalysis, Cryptology
+
+Types of Attacking approaches
+1. Cryptanalysis Attack
+Type of Attack         |       Known to cryptanalyst 
+--------------         |       ---------------------
+Cipher text only       |       Encryption Algorithm and Cipher text
+2. Brute Force Attck / guessing attack / exhaustive key search
+
+Classical Encription techniques
+1. Substituition
+   a. Ceaser Cipher
+   b. Monoalphabatic Cipher
+   c. Playfair Cipher
+   d. Hill Cipher
+   e. Polyalphabatic Cipher
+   f. One-Time Pad
+2. Transposition
+   a. Rail Fence
+   b. Row Column Transposition
+
+
+
