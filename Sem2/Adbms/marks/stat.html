@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #root {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            width: 100%;
+            height: 100vh;
+        }
+        #root > div {
+            border: 1px solid black;
+        }
+        #subject1, #subject2, #subject3, #subject4 {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 50px;
+            border: 1px solid black;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div><h4>Total Students, Subject1 Marks >= 90 🟢 & <= 40 🔴</h4><div id="subject1"></div></div>
+        <div><h4>Total Students, Subject2 Marks >= 90 🟢 & <= 40 🔴</h4><div id="subject2"></div></div>
+        <div><h4>Total Students, Subject3 Marks >= 90 🟢 & <= 40 🔴</h4><div id="subject3"></div></div>
+        <div><h4>Total Students, Subject4 Marks >= 90 🟢 & <= 40 🔴</h4><div id="subject4"></div></div>
+    </div>
+    <script>
+
+        let total = 0;
+        let sub1 = document.getElementById("subject1");
+        let sub2 = document.getElementById("subject2");
+        let sub3 = document.getElementById("subject3");
+        let sub4 = document.getElementById("subject4");
+        
+        async function getTotal() {
+            let response = await fetch("http://localhost:3333/stat/totalStudents");
+            if(!response.ok) {
+                alert("Data fetching error");
+            } else {
+                let data = await response.json();
+                total = data.total;
+                console.log(data.total);
+            }
+        }
+        
+        async function getSubject1() {
+            let response = await fetch("http://localhost:3333/stat/subject1");
+            if(!response.ok) {
+                alert("Data fetching error");
+            } else {
+                let data = await response.json();
+                console.log(data);
+
+                let bar90 = document.createElement("div");
+                bar90.textContent = `${data.greater_than_ninety}`;
+                bar90.style.height = String(data.greater_than_ninety * 40 + 10) + "px";
+                bar90.style.width = "30px";
+                bar90.style.backgroundColor = "green";
+                bar90.style.padding = "1rem";
+
+                let bar40 = document.createElement("div");
+                bar40.textContent = String(data.less_than_fourty);
+                bar40.style.height = String(data.less_than_fourty * 40 + 10) + "px";
+                bar40.style.width = "30px";
+                bar40.style.backgroundColor = "red";
+                bar40.style.padding = "1rem";
+
+                sub1.appendChild(bar90);
+                sub1.appendChild(bar40);
+            }
+        }
+                async function getSubject2() {
+            let response = await fetch("http://localhost:3333/stat/subject2");
+            if(!response.ok) {
+                alert("Data fetching error");
+            } else {
+                let data = await response.json();
+                console.log(data);
+
+                let bar90 = document.createElement("div");
+                bar90.textContent = `${data.greater_than_ninety}`;
+                bar90.style.height = String(data.greater_than_ninety * 40 + 10) + "px";
+                bar90.style.width = "30px";
+                bar90.style.backgroundColor = "green";
+                bar90.style.padding = "1rem";
+
+                let bar40 = document.createElement("div");
+                bar40.textContent = String(data.less_than_fourty);
+                bar40.style.height = String(data.less_than_fourty * 40 + 10) + "px";
+                bar40.style.width = "30px";
+                bar40.style.backgroundColor = "red";
+                bar40.style.padding = "1rem";
+
+                sub2.appendChild(bar90);
+                sub2.appendChild(bar40);
+            }
+        }
+                async function getSubject3() {
+            let response = await fetch("http://localhost:3333/stat/subject3");
+            if(!response.ok) {
+                alert("Data fetching error");
+            } else {
+                let data = await response.json();
+                console.log(data);
+
+                let bar90 = document.createElement("div");
+                bar90.textContent = `${data.greater_than_ninety}`;
+                bar90.style.height = String(data.greater_than_ninety * 40 + 10) + "px";
+                bar90.style.width = "30px";
+                bar90.style.backgroundColor = "green";
+                bar90.style.padding = "1rem";
+
+                let bar40 = document.createElement("div");
+                bar40.textContent = String(data.less_than_fourty);
+                bar40.style.height = String(data.less_than_fourty * 40 + 10) + "px";
+                bar40.style.width = "30px";
+                bar40.style.backgroundColor = "red";
+                bar40.style.padding = "1rem";
+
+                sub3.appendChild(bar90);
+                sub3.appendChild(bar40);
+            }
+        }
+                async function getSubject4() {
+            let response = await fetch("http://localhost:3333/stat/subject4");
+            if(!response.ok) {
+                alert("Data fetching error");
+            } else {
+                let data = await response.json();
+                console.log(data);
+
+                let bar90 = document.createElement("div");
+                bar90.textContent = `${data.greater_than_ninety}`;
+                bar90.style.height = String(data.greater_than_ninety * 40 + 10) + "px";
+                bar90.style.width = "30px";
+                bar90.style.backgroundColor = "green";
+                bar90.style.padding = "1rem";
+
+                let bar40 = document.createElement("div");
+                bar40.textContent = String(data.less_than_fourty);
+                bar40.style.height = String(data.less_than_fourty * 40 + 10) + "px";
+                bar40.style.width = "30px";
+                bar40.style.backgroundColor = "red";
+                bar40.style.padding = "1rem";
+
+                sub4.appendChild(bar90);
+                sub4.appendChild(bar40);
+            }
+        }
+    getTotal();
+    getSubject1();
+    getSubject2();
+    getSubject3();
+    getSubject4();
+    </script>
+</body>
+</html>

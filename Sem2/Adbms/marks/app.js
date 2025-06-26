@@ -112,6 +112,55 @@ app.get("/data", async (req, res) => {
     }
 });
 
+app.get("/stat/totalStudents", async (req, res) => {
+    try {
+        let { rows } = await pool.query("select count(email) as total from student_marks");
+        res.status(200).send(rows[0]);
+    } catch (err) {
+        res.status(500).send("Internal server error");
+    }
+});
+
+app.get("/stat/subject1", async (req, res) => {
+    try {
+        let ninety = await pool.query("select count(email) as total_std from student_marks where subject1 >= 90;");
+        let fourty = await pool.query("select count(email) as total_std from student_marks where subject1 <= 40;");
+        res.send({ greater_than_ninety: ninety.rows[0].total_std, less_than_fourty: fourty.rows[0].total_std });
+    } catch (err) {
+        res.status(500).send("Internal server error");
+    }
+});
+
+app.get("/stat/subject2", async (req, res) => {
+    try {
+        let ninety = await pool.query("select count(email) as total_std from student_marks where subject2 >= 90;");
+        let fourty = await pool.query("select count(email) as total_std from student_marks where subject2 <= 40;");
+        res.send({ greater_than_ninety: ninety.rows[0].total_std, less_than_fourty: fourty.rows[0].total_std });
+    } catch (err) {
+        res.status(500).send("Internal server error");
+    }
+});
+
+app.get("/stat/subject3", async (req, res) => {
+    try {
+        let ninety = await pool.query("select count(email) as total_std from student_marks where subject3 >= 90;");
+        let fourty = await pool.query("select count(email) as total_std from student_marks where subject3 <= 40;");
+        res.send({ greater_than_ninety: ninety.rows[0].total_std, less_than_fourty: fourty.rows[0].total_std });
+    } catch (err) {
+        res.status(500).send("Internal server error");
+    }
+});
+
+app.get("/stat/subject4", async (req, res) => {
+    try {
+        let ninety = await pool.query("select count(email) as total_std from student_marks where subject4 >= 90;");
+        let fourty = await pool.query("select count(email) as total_std from student_marks where subject4 <= 40;");
+        res.send({ greater_than_ninety: ninety.rows[0].total_std, less_than_fourty: fourty.rows[0].total_std });
+    } catch (err) {
+        res.status(500).send("Internal server error");
+    }
+});
+
 app.listen(3333, () => {
     console.log("The Server is running and listening on port: 3333");
 });
