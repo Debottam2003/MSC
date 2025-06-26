@@ -1,74 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Marks Form</title>
+    <title>Student Data</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f2f4f8;
-        }
-
-        form {
-            background: #fff;
-            padding: 30px 40px;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            width: 300px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            background-color: rgb(219, 231, 243);
         }
-
-        input[type="text"],
-        input[type="number"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+        #root {
+            display: flex;
+            flex-direction: row;
         }
-
-        input:focus {
-            border-color: #007BFF;
-            outline: none;
+        #s1 , #s2, #s3, #s4{
+            display: flex;
+            gap: 5px;
         }
-
-        button {
-            padding: 10px;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+        #sub1, #sub2, #sub3, #sub4 {
+            width: 75px;
+            height: 20px;
+            display: flex;
         }
-
-        button:hover {
-            background-color: #0056b3;
+        #sub1 {
+            background-color: blue;
+        }
+        #sub2 {
+            background-color: orange;
+        }
+        #sub3 {
+            background-color: green;
+        }
+        #sub4 {
+            background-color: red;
+        }
+        #x-axis > div{
+            width: 2px;
+            border: 2px solid black;
+            box-sizing: border-box;
+            height: 100px;
+        }
+        .student {
+            bottom: 0;
+            padding: 0;
+            margin: 0;
+        }
+        #hero {
+            display: flex;
+            gap: 50px;
+        }
+        #bar-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 50px;
+        }
+        .email {
+            transform: rotate(-75deg);
+            position: absolute;
+            bottom: 0;
+            left: 10;
+            white-space: nowrap;
         }
     </style>
 </head>
+
 <body>
-    <form action="/marks" method="post">
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="number" name="subject1" placeholder="Subject 1" required />
-        <input type="number" name="subject2" placeholder="Subject 2" required />
-        <input type="number" name="subject3" placeholder="Subject 3" required />
-        <input type="number" name="subject4" placeholder="Subject 4" required />
-        <button type="submit">Submit</button>
-    </form>
+    <h1 id="heading">Student MarkSheet Bar_Graph</h1>
+    <div id="notation">
+        <div id="s1"><div id="sub1"></div>Subject1</div>
+        <div id="s2"><div id="sub2"></div>Subject2</div>
+        <div id="s3"><div id="sub3"></div>Subject3</div>
+        <div id="s4"><div id="sub4"></div>Subject4</div>
+    </div>
+    <div id="hero">
+    <div id="root">
+    <div id="x-axis">
+        <div><span> 400</span></div>
+        <div><span> 300</span></div>
+        <div><span> 200</span></div>
+        <div><span> 100</span></div>
+        <spn>0</spn>
+    </div>
+    </div>
+    <div id="bar-container"></div>
+    </div>
+    <script>
+        let bars = document.getElementById("bar-container");
+
+        async function getData() {
+            try {
+                let response = await fetch("http://localhost:3333/data");
+                if (!response.ok) {
+                    alert("Data fetching issue");
+                } else {
+                    let data = await response.json();
+                    data.forEach((std) => {
+                        let student = document.createElement("div");
+
+                        let email = document.createElement("div");
+                        email.textContent = std.email;
+                        email.classList.add("email");
+
+                        let sub1 = document.createElement("div");
+                        sub1.style.height = String(std.subject1) + "px";
+                        sub1.style.width = "40px";
+                        sub1.style.backgroundColor = "blue";
+                        sub1.textContent = std.subject1;
+
+                        let sub2 = document.createElement("div");
+                        sub2.style.height = String(std.subject2) + "px";
+                        sub2.style.width = "40px";
+                        sub2.style.backgroundColor = "orange";
+                        sub2.textContent = std.subject2;
+
+                        let sub3 = document.createElement("div");
+                        sub3.style.height = String(std.subject3) + "px";
+                        sub3.style.width = "40px";
+                        sub3.style.backgroundColor = "green";
+                        sub3.textContent = std.subject3;
+
+                        let sub4 = document.createElement("div");
+                        sub4.style.height = String(std.subject4) + "px";
+                        sub4.style.width = "40px";
+                        sub4.style.backgroundColor = "red";
+                        sub4.textContent = std.subject4;
+
+                        student.style.display = "flex";
+                        student.style.flexDirection = "column";
+                        student.style.alignItems = "center";
+
+                        student.appendChild(sub4);
+                        student.appendChild(sub3);
+                        student.appendChild(sub2);
+                        student.appendChild(sub1);
+                        student.appendChild(email);
+                        
+                        let total = document.createElement("div")
+                        total.textContent = std.subject1 + std.subject2 + std.subject3 + std.subject4;
+                        total.style.fontWeight = "bold";
+                        total.style.marginBottom = "5px";
+                        student.prepend(total);
+
+                        student.classList.add("student");
+
+                        bars.appendChild(student);
+                    });
+                }
+            } catch (err) {
+                console.log(err.message);
+                // alert("Data fetch issue");
+            }
+        }
+
+        getData();
+    </script>
 </body>
+
 </html>
