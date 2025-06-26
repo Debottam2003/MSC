@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        table {
+            width: 90%;
+            max-width: 800px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        th {
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #heading{
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="heading">Student MarkSheet</h1>
+    <div id="root"></div>
+
+    <script>
+        let root = document.getElementById("root");
+
+        async function getData() {
+            try {
+                let response = await fetch("http://localhost:3333/data");
+                if (!response.ok) {
+                    alert("Data fetch issue");
+                } else {
+                    let data = await response.json();
+
+                    let table = document.createElement("table");
+                    let thead = document.createElement("thead");
+                    let HeadRow = document.createElement("tr");
+
+                    let email = document.createElement("th");
+                    email.textContent = "Email";
+                    let subject1 = document.createElement("th");
+                    subject1.textContent = "Subject1";
+                    let subject2 = document.createElement("th");
+                    subject2.textContent = "Subject2";
+                    let subject3 = document.createElement("th");
+                    subject3.textContent = "Subject3";
+                    let subject4 = document.createElement("th");
+                    subject4.textContent = "Subject4";
+
+                    HeadRow.appendChild(email);
+                    HeadRow.appendChild(subject1);
+                    HeadRow.appendChild(subject2);
+                    HeadRow.appendChild(subject3);
+                    HeadRow.appendChild(subject4);
+                    thead.appendChild(HeadRow);
+                    table.appendChild(thead);
+
+                    let tbody = document.createElement("tbody");
+
+                    data.forEach((std) => {
+                        let tr = document.createElement("tr");
+
+                        let email = document.createElement("td");
+                        email.textContent = std.email;
+                        let subject1 = document.createElement("td");
+                        subject1.textContent = std.subject1;
+                        let subject2 = document.createElement("td");
+                        subject2.textContent = std.subject2;
+                        let subject3 = document.createElement("td");
+                        subject3.textContent = std.subject3;
+                        let subject4 = document.createElement("td");
+                        subject4.textContent = std.subject4;
+
+                        tr.appendChild(email);
+                        tr.appendChild(subject1);
+                        tr.appendChild(subject2);
+                        tr.appendChild(subject3);
+                        tr.appendChild(subject4);
+
+                        tbody.appendChild(tr);
+                    });
+
+                    table.appendChild(tbody);
+                    root.appendChild(table);
+                }
+            } catch (err) {
+                alert("Data fetch issue");
+            }
+        }
+
+        getData();
+    </script>
+</body>
+
+</html>
