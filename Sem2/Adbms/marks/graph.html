@@ -57,7 +57,7 @@
             gap: 50px;
         }
         .email {
-            transform: rotate(-75deg);
+            transform: rotate(-80deg);
             position: absolute;
             bottom: 0;
             left: 10;
@@ -96,7 +96,15 @@
                     alert("Data fetching issue");
                 } else {
                     let data = await response.json();
-                    data.forEach((std) => {
+
+                    for(std of data) {
+
+                        await new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                resolve("done");
+                            }, 500);
+                        });
+
                         let student = document.createElement("div");
 
                         let email = document.createElement("div");
@@ -146,7 +154,8 @@
                         student.classList.add("student");
 
                         bars.appendChild(student);
-                    });
+                        bars.lastElementChild.scrollIntoView({behavior: "smooth"});
+                    };
                 }
             } catch (err) {
                 console.log(err.message);
