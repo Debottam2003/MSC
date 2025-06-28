@@ -1,13 +1,13 @@
 package distributed_system_os.assignment4;
 
-import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Site implements Runnable {
     public int site_id;
     public boolean request_send = false;
     public Site holder;
-    public Queue<Site> request_q = new LinkedList<>();
+    public Queue<Site> request_q = new ConcurrentLinkedQueue<>();
     public boolean token;
     public boolean cs = false;
 
