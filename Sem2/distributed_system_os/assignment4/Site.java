@@ -8,7 +8,7 @@ public class Site implements Runnable {
     public boolean request_send = false;
     public Site holder;
     public Queue<Site> request_q = new ConcurrentLinkedQueue<>();
-    public boolean token;
+    public boolean token = false;
     public boolean cs = false;
 
     // Constructor Function
@@ -33,17 +33,15 @@ public class Site implements Runnable {
 
     // Own Token request
     public void requestToken() {
-        synchronized (this.holder) {
-            System.out.println(this.site_id + " Requested for token to " + this.holder.site_id);
-            if (this.token && this.request_q.isEmpty()) {
-                this.enterCS();
-            } else if (!this.token && !this.request_send) {
-                this.request_q.offer(this);
-                this.request_send = true;
-                this.holder.receiveTokenRequest(this);
-            } else if (!this.token && this.request_send) {
-                this.request_q.offer(this);
-            }
+        System.out.println(this.site_id + " Requested for token to " + this.holder.site_id);
+        if (this.token && this.request_q.isEmpty()) {
+            this.enterCS();
+        } else if (!this.token && !this.request_send) {
+            this.request_q.offer(this);
+            this.request_send = true;
+            this.holder.receiveTokenRequest(this);
+        } else if (!this.token && this.request_send) {
+            this.request_q.offer(this);
         }
     }
 
@@ -71,26 +69,24 @@ public class Site implements Runnable {
     // Receive Token
     // Sender site's queue is not empty so it gives the token with a token request
     public void receiveTokenWithReq(Site site) {
-        synchronized (this) {
-            System.out.println(this.site_id + " Received token from it's holder with a token request");
-            if (this.request_send) {
-                this.request_send = false;
-            }
-            this.token = true;
-            this.request_q.offer(site);
-            if (this.request_q.peek() == this) {
-                this.request_q.poll();
-                this.enterCS();
+        System.out.println(this.site_id + " Received token from it's holder with a token request");
+        if (this.request_send) {
+            this.request_send = false;
+        }
+        this.token = true;
+        this.request_q.offer(site);
+        if (this.request_q.peek() == this) {
+            this.request_q.poll();
+            this.enterCS();
+        } else {
+            this.holder = this.request_q.poll();
+            if (this.request_q.isEmpty()) {
+                this.token = false;
+                this.holder.receiveToken();
             } else {
-                this.holder = this.request_q.poll();
-                if (this.request_q.isEmpty()) {
-                    this.token = false;
-                    this.holder.receiveToken();
-                } else {
-                    this.token = false;
-                    this.request_send = true;
-                    this.holder.receiveTokenWithReq(this);
-                }
+                this.token = false;
+                this.request_send = true;
+                this.holder.receiveTokenWithReq(this);
             }
         }
     }
@@ -98,25 +94,23 @@ public class Site implements Runnable {
     // Receive Token
     // Sender site's queue is empty so it gives the token directly
     public void receiveToken() {
-        synchronized (this) {
-            System.out.println(this.site_id + " Received token from it's holder");
-            if (this.request_send) {
-                this.request_send = false;
-            }
-            this.token = true;
-            if (this.request_q.peek() == this) {
-                this.request_q.poll();
-                this.enterCS();
+        System.out.println(this.site_id + " Received token from it's holder");
+        if (this.request_send) {
+            this.request_send = false;
+        }
+        this.token = true;
+        if (this.request_q.peek() == this) {
+            this.request_q.poll();
+            this.enterCS();
+        } else {
+            this.holder = this.request_q.poll();
+            if (this.request_q.isEmpty()) {
+                this.token = false;
+                this.holder.receiveToken();
             } else {
-                this.holder = this.request_q.poll();
-                if (this.request_q.isEmpty()) {
-                    this.token = false;
-                    this.holder.receiveToken();
-                } else {
-                    this.token = false;
-                    this.request_send = true;
-                    this.holder.receiveTokenWithReq(this);
-                }
+                this.token = false;
+                this.request_send = true;
+                this.holder.receiveTokenWithReq(this);
             }
         }
     }
@@ -140,16 +134,26 @@ public class Site implements Runnable {
             for (Site s : this.request_q) {
                 System.out.println(s.site_id);
             }
-            this.holder = this.request_q.poll();
-            if (this.request_q.isEmpty()) {
-                this.token = false;
-                this.holder.receiveToken();
+            Site nextHolder = this.request_q.poll();
+            if (nextHolder != null) {
+                this.holder = nextHolder;
+                if (this.request_q.isEmpty()) {
+                    this.token = false;
+                    this.holder.receiveToken();
+                } else {
+                    this.token = false;
+                    this.holder.receiveTokenWithReq(this);
+                }
             } else {
-                this.token = false;
-                this.holder.receiveTokenWithReq(this);
+                // Should never happen, but defensive fallback
+                System.out.println("Warning: Site " + site_id + " found no holder while exiting CS.");
+                this.holder = this;
+                this.token = true;
             }
         } else {
             this.holder = this;
+            this.token = true;
         }
     }
+
 }
