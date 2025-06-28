@@ -18,24 +18,22 @@ public class Site implements Runnable {
 
     @Override
     public void run() {
-        synchronized (this) {
-            System.out.println("Site " + this.site_id + " is Started");
-            if (this.holder == this) {
-                this.enterCS();
-            } else {
-                try {
-                    Thread.sleep(8000);
-                    this.requestToken();
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+        System.out.println("Site " + this.site_id + " is Started");
+        if (this.holder == this && this.token == true) {
+            this.enterCS();
+        } else {
+            try {
+                Thread.sleep(4000);
+                this.requestToken();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
     }
 
     // Own Token request
     public void requestToken() {
-        synchronized (this) {
+        synchronized (this.holder) {
             System.out.println(this.site_id + " Requested for token to " + this.holder.site_id);
             if (this.token && this.request_q.isEmpty()) {
                 this.enterCS();
@@ -54,9 +52,10 @@ public class Site implements Runnable {
         synchronized (this) {
             System.out.println(this.site_id + " Received token request from " + site.site_id);
             if (this.token && !this.cs && this.request_q.isEmpty() && !this.request_send) {
-                this.holder = site;
                 if (this != site) {
-                    site.holder.receiveToken();
+                    this.token = false;
+                    this.holder = site;
+                    this.holder.receiveToken();
                 }
             } else if (!this.token && this.request_send) {
                 this.request_q.offer(site);
