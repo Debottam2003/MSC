@@ -5,7 +5,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const pool = new Pool({
-    connectionString: "postgres://postgres:okudera2003@localhost:3000/restaurant",
+    connectionString: "postgres://postgres:[password]localhost:3000/restaurant",
     max: 100
 });
 
@@ -28,15 +28,18 @@ app.get("/masterdata", (req, res) => {
 app.post("/saveMasterData", async (req, res) => {
     try {
         console.log(req.body);
-        let { item_id, name, item_description, price, type } = req.body;
-        if (!item_id || !name || !item_description || !price || !type) {
+        let { item_id, name, item_description, price, type, another } = req.body;
+        if (!item_id || !name || !item_description || !price || !type || !another) {
             res.status(400).send("Submit all the fields");
             return;
         }
-        console.log(req.body);
         let { rows } = await pool.query("insert into items(item_id, name, item_description, price, type) values($1, $2, $3, $4, $5) returning name", [item_id, name, item_description, price, type]);
         console.log(rows);
-        return res.status(200).send("Item added successfully.");
+        if (another === "no") {
+            return res.status(200).send("Item added successfully.");
+        } else {
+            res.sendFile(path.join(__dirname, 'masterdata.html'));
+        }
     } catch (err) {
         console.log(err);
         res.status(500).send("Internal Server error");
