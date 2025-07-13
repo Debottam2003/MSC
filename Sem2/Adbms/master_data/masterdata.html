@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Master Data</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 90vh;
+      }
+      form {
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        gap: 20px;
+        max-width: 400px;
+        width: 400px;
+        border-radius: 10px;
+      }
+      #btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      input[type="text"] {
+        border-radius: 5px;
+        padding: 0.5rem;
+        width: 90%;
+        outline: none;
+        border: 2px solid black;
+      }
+      div {
+        width: 90%;
+      }
+      #save {
+        padding: 0.5rem;
+      }
+      @media (max-width: 600px) {
+        form {
+            width: 80%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/saveMasterData" method="post">
+      <h2>Master Data Entry Form</h2>
+      <div>
+        <label for="id">Item ID</label><br>
+        <input type="text" name="item_id" id="id" placeholder="Auto generated" />
+      </div>
+      <div>
+        <label for="name">Item Name</label><br>
+        <input type="text" name="name" id="name" required />
+      </div>
+      <div>
+        <label for="description">Item Description</label><br>
+        <input type="text" name="item_description" id="description" required />
+      </div>
+      <div>
+        <label for="price">Price(in Rs.)</label><br>
+        <input type="text" name="price" id="price" required />
+      </div>
+      <div>
+        <label for="type">Type </label>
+        <select name="type" id="type" required>
+          <option value="veg">Veg</option>
+          <option value="nonveg">Non Veg</option>
+        </select>
+      </div>
+      <div>
+        <label for="another">Add Another(Y/N)</label>
+        <input type="radio" name="another" value="yes" required />y
+        <input type="radio" name="another" value="no" required />N
+      </div>
+      <div id="btn">
+        <button id="save">Save</button>
+      </div>
+    </form>
+    <script>
+        document.getElementById("id").value = `ID${Math.floor(10000 + Math.random() * 99990) + Date.now()}`;
+    </script>
+  </body>
+</html>
