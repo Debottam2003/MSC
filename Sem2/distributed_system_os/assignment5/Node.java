@@ -1,5 +1,8 @@
 package Sem2.distributed_system_os.assignment5;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Node implements Runnable {
     public int id;
     public String state;
@@ -7,6 +10,7 @@ public class Node implements Runnable {
     public boolean snapshot_started = false;
     public int total_nodes;
     public int[][] graph;
+    public Map<Integer, String> channelData = new HashMap<>();
 
     public Node(int id, int n, int[][] graph) {
         this.id = id;
@@ -17,6 +21,21 @@ public class Node implements Runnable {
     @Override
     public void run() {
         System.out.println("Process " + this.id + " is started");
+        int i = 0;
+        while (i < 2) {
+            try {
+                Thread.sleep(500);
+                for (int j = 0; j < this.total_nodes; j++) {
+                    if (this.id != j && this.graph[this.id][j] == 1) {
+                        Message msg = new Message(this.id, "This is a normal message", j, false);
+                        Main.sendMessage(msg);
+                    }
+                }
+                i++;
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
     }
 
     public void receiveMessage(Message msg) {
@@ -33,6 +52,7 @@ public class Node implements Runnable {
 
                 System.out.println("For process " + this.id + ": " + this.state);
                 System.out.println("Channel data between " + msg.sender_id + " and " + msg.receiver_id + " became : φ");
+                this.channelData.put(msg.sender_id, "closed");
 
                 for (int i = 0; i < this.total_nodes; i++) {
                     if (this.id != i && this.graph[this.id][i] == 1) {
@@ -46,7 +66,19 @@ public class Node implements Runnable {
                 System.out.println("Marker message received by Process " + this.id +
                         " on channel " + msg.sender_id + "_" + msg.receiver_id);
 
-                System.out.println("Local state is already captured in process: " + this.id + " and now the channel " + msg.sender_id + "_" + msg.receiver_id + " is closed");
+                System.out.println("Local state is already captured in process: " + this.id + " and now the channel "
+                        + msg.sender_id + "_" + msg.receiver_id + " is closed");
+                this.channelData.put(msg.sender_id, "closed");
+
+            } else if (!msg.is_marker) {
+                System.out.println("Normal message received by Process " + this.id +
+                        " on channel " + msg.sender_id + "_" + msg.receiver_id);
+                String ch = this.channelData.get(msg.sender_id);
+                if(this.snapshot_started) {
+                    if( ch == null ) {
+                    System.out.println("Local snapshot is done on node " + this.id + " so this received message is stored as transit message on channel " + msg.sender_id + "_" + msg.receiver_id);
+                    }
+                }
             }
         }
     }

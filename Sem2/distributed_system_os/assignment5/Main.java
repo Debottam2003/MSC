@@ -62,10 +62,10 @@ public class Main {
     }
 
     // Send marker message
-    public static void sendMessage(Message marker) {
+    public static void sendMessage(Message msg) {
         // System.out.println(marker.sender_id + " " + marker.message + " " + marker.receiver_id + " " +
         // marker.is_marker);
-        Node receiver = nodeMap.get(marker.receiver_id);
+        Node receiver = nodeMap.get(msg.receiver_id);
         if (receiver != null) {
             new Thread(() -> {
                 try {
@@ -73,11 +73,11 @@ public class Main {
                 } catch (InterruptedException e) {
                     System.out.println(e);
                 }
-                receiver.receiveMessage(marker);
+                receiver.receiveMessage(msg);
             }).start();
 
         } else {
-            System.out.println("Receiver node not found: " + marker.receiver_id);
+            System.out.println("Receiver node not found: " + msg.receiver_id);
         }
     }
 }
