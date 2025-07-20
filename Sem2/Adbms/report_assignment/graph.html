@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #111;
+        color: white;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #111;
+      }
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        background-color: #111;
+      }
+      #index {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #111;
+      }
+      #index div {
+        border-left: 1px solid #fff;
+        border-top: 1px solid #fff;
+        box-sizing: border-box;
+        margin: 0;
+        background-color: #111;
+      }
+      #data-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        margin-left: 20px;
+        gap: 20px;
+        background-color: #111;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is the Report page 1</h1>
+    <h5>Total orders for each pin code (Y-axix: Total no of orders, X-axis: Pincode)</h5>
+    <div id="container">
+      <div id="index">
+        <span>0</span>
+      </div>
+      <div id="data-area"></div>
+    </div>
+    <script>
+      let index = document.getElementById("index");
+      let data_area = document.getElementById("data-area");
+      async function fecthData() {
+        let response = await fetch("http://localhost:3333/graphdata");
+        if (!response.ok) {
+          alert("something went wrong");
+        } else {
+          let data = await response.json();
+          let n = Number(data.totalOrders);
+          for (let i = 1; i <= n; i ++) {
+
+            let div = document.createElement("div");
+            div.style.height = "40px";
+
+            let span = document.createElement("span");
+            span.textContent = i;
+
+            div.appendChild(span);
+            
+            index.prepend(div);
+
+            // console.log(i);
+          }
+          for (let i = 0; i < data.message.length; i++) {
+
+            let bar = document.createElement("div");
+
+            let div = document.createElement("div");
+            div.style.height = `${data.message[i].total_orders * 40}px`;
+            div.style.width = "60px";
+            div.style.backgroundColor = "green";
+
+            let pin = document.createElement("span");
+            pin.textContent = data.message[i].pincode;
+
+            let total = document.createElement("span");
+            total.textContent = data.message[i].total_orders;
+
+            bar.appendChild(total);
+            bar.appendChild(div);
+            bar.appendChild(pin);
+
+            bar.style.display = "flex";
+            bar.style.flexDirection = "column";
+            bar.style.justifyContent = "flex-end";
+
+            div.style.borderRadius = "5px";
+
+            data_area.appendChild(bar);
+          }
+        }
+      }
+      fecthData();
+    </script>
+  </body>
+</html>

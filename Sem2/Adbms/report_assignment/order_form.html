@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Entry Form</title>
+    <link rel="stylesheet" href="/order-form-styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>ORDER ENTRY FORM</h2>
+
+        <form action="/submit-order" method="POST">
+            <div class="form-group order-number-wrapper">
+                <label for="order-number">Order Number</label>
+                <span style="color: #6b7280; font-size: 14px;">auto-generated</span>
+            </div>
+            <input type="text" id="order-number" readonly placeholder="Will be generated automatically" class="form-group">
+
+            <div class="form-group">
+                <label for="order-date">Order Date</label>
+                <input type="date" id="order-date" name="order_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="customer-name">Customer Name</label>
+                <input type="text" id="customer-name" name="customer_name" placeholder="e.g., John Doe" required>
+            </div>
+
+            <div class="form-group">
+                <label for="customer-address">Customer Address</label>
+                <textarea id="customer-address" name="customer_address" placeholder="e.g., 123 Main St, Anytown" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" name="pincode" placeholder="e.g., 123456" required>
+            </div>
+
+            <div id="order-items-container">
+                <div class="item-row">
+                    <div>
+                        <label for="item-0">Item</label>
+                        <select id="item-0" name="item" class="item-select" required>
+                            <option value="">Select an Item</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="quantity-0">Quantity</label>
+                        <input type="number" id="quantity-0" name="quantity" min="1" value="1" required>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" id="add-item-button">Add Another Item</button>
+
+            <div class="form-group">
+                <label for="delivery-person">Delivery Person</label>
+                <select id="delivery-person" name="delivery-person" required>
+                    <option value="delivery-person-1">Rajesh Kumar</option>
+                    <option value="delivery-person-2">Priya Sharma</option>
+                    <option value="delivery-person-3">Amit Singh</option>
+                </select>
+            </div>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        let itemCounter = 0;
+
+        window.onload = function () {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            document.getElementById('order-date').value = `${yyyy}-${mm}-${dd}`;
+            populateItemDropdown(document.getElementById('item-0'));
+            document.getElementById('add-item-button').addEventListener('click', addOrderItemField);
+        };
+
+        function populateItemDropdown(selectElement) {
+            fetch('http://localhost:3333/api/items')         // MAKE CHANGE: Adjust the endpoint as per your server setup
+                .then(response => response.json())
+                .then(items => {
+                    selectElement.innerHTML = '';
+                    items.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.item_id;
+                        option.textContent = item.name;
+                        selectElement.appendChild(option);
+                    });
+                })
+                .catch(err => {
+                    selectElement.innerHTML = '<option value="">Failed to load items</option>';
+                    console.error('Error loading items:', err);
+                });
+        }
+
+        function addOrderItemField() {
+            itemCounter++;
+            const container = document.getElementById('order-items-container');
+
+            const newRow = document.createElement('div');
+            newRow.className = 'item-row';
+
+            const itemDiv = document.createElement('div');
+            itemDiv.innerHTML = `
+                <label for="item-${itemCounter}">Item</label>
+                <select id="item-${itemCounter}" name="item" class="item-select" required>
+                    <option value="">Select an Item</option>
+                </select>
+            `;
+
+            const quantityDiv = document.createElement('div');
+            quantityDiv.innerHTML = `
+                <label for="quantity-${itemCounter}">Quantity</label>
+                <input type="number" id="quantity-${itemCounter}" name="quantity" min="1" value="1" required>
+            `;
+
+            newRow.appendChild(itemDiv);
+            newRow.appendChild(quantityDiv);
+            container.appendChild(newRow);
+
+            populateItemDropdown(document.getElementById(`item-${itemCounter}`));
+        }
+    </script>
+</body>
+</html>
