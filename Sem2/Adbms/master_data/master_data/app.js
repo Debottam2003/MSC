@@ -33,6 +33,14 @@ app.get("/order", (req, res) => {
     res.sendFile(path.join(__dirname, 'order_form.html'));
 });
 
+app.get("/report", (req, res) => {
+    res.sendFile(path.join(__dirname, 'report.html'));
+});
+
+app.get("/graph", (req, res) => {
+    res.sendFile(path.join(__dirname, 'graph.html'));
+});
+
 app.post("/saveMasterData", async (req, res) => {
     try {
         console.log(req.body);
@@ -80,10 +88,10 @@ app.post('/submit-order', async (req, res) => {
         // Prepare multiple inserts for order_items
         const itemSql = 'INSERT INTO order_items (order_id, item_name, quantity) VALUES ($1, $2, $3)';
 
-            for (let i = 0; i < items.length; i++) {
-                await pool.query(itemSql, [data.rows[0].order_id, items[i], quantities[i]]);
-            }
-            res.send("Order placed Successfully.");
+        for (let i = 0; i < items.length; i++) {
+            await pool.query(itemSql, [data.rows[0].order_id, items[i], quantities[i]]);
+        }
+        res.send("Order placed Successfully.");
 
         // For single item order 
         // await pool.query(itemSql, [data.rows[0].order_id, ...items, ...quantities]);
@@ -104,6 +112,40 @@ app.get("/api/items", async (req, res) => {
         console.log(rows);
         res.status(200).send(rows);
     } catch (err) {
+        res.status(500).send("Internal server error");
+    }
+});
+
+app.post("/report", express.json(), async (req, res) => {
+    try {
+        console.log(req.body);
+        let { rows } = await pool.query("select * from orders where order_date >= $1 and order_date <= $2", [req.body.lower, req.body.upper]);
+        if (rows.length > 0) {
+            console.log(rows[0]);
+            res.status(200).send(rows);
+        }
+        else {
+            res.status(400).json({ message: "No orders found" });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Internal server error");
+    }
+});
+
+app.get("/graphdata", async (req, res) => {
+    try {
+        let { rows } = await pool.query("select count(order_id) as total_orders, pincode from orders group by pincode;");
+        let total = await pool.query("select count(order_id) as total from orders;");
+        if (rows.length > 0 && total.rows.length > 0) {
+            console.log(rows[0]);
+            res.status(200).json({ message: rows, totalOrders: total.rows[0].total });
+        }
+        else {
+            res.status(400).json({ message: "No orders found" });
+        }
+    } catch (err) {
+        console.log(err);
         res.status(500).send("Internal server error");
     }
 });

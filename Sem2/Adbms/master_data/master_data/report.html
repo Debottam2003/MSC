@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #181a1b;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #e0e0e0;
+        }
+        h1 {
+            color: #fafafa;
+            text-align: center;
+        }
+        #report-form {
+            background: #23272a;
+            padding: 24px 32px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 32px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        label {
+            margin-bottom: 4px;
+            color: #b0b3b8;
+        }
+        input[type="date"] {
+            padding: 6px 10px;
+            border: 1px solid #444950;
+            border-radius: 4px;
+            background: #181a1b;
+            color: #e0e0e0;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+        button {
+            background: #0078d4;
+            color: #fff;
+            border: none;
+            padding: 10px 0;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #005fa3;
+        }
+        #report-table {
+            display: none;
+        }
+        #report-table {
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: #23272a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
+
+        #report-table th, #report-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #36393f;
+        }
+
+        #report-table th {
+            background: #0078d4;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        #report-table tr:nth-child(even) {
+            background: #202225;
+        }
+
+        #report-table tr:hover {
+            background: #2c2f33;
+        }
+    </style>
+</head>
+<body>
+    <h1>This is the report page2</h1>
+    <form id="report-form">
+        <label for="lower">Lower Limit</label><input type="date" name="lower" id="lower" required>
+        <label for="upper">Upper Limit</label><input type="date" name="upper" id="upper" required>
+        <button id="btn" type="submit">Get Report</button>
+    </form>
+
+        <table id="report-table"></table>
+
+    <script>
+        let form = document.getElementById("report-form");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            let lower = document.getElementById("lower").value;
+            let upper = document.getElementById("upper").value;
+            console.log(lower, upper);
+            try{
+                let response = await fetch("http://localhost:3333/report", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ lower, upper })
+                });
+                if(!response.ok) {
+                    alert("No orders found");
+                } else {
+                    let data = await response.json();
+                    let table = document.getElementById("report-table");
+                    table.innerHTML = `          
+                                <tr>
+                                <th>Order_id</th>
+                                <th>Order_Date</th>
+                                <th>Customer_name</th>
+                                <th>Address</th>
+                                <th>Pincode</th>
+                                </tr>`;
+                    data.forEach((d) => {
+
+                        let tr = document.createElement("tr");
+
+                        let td1 = document.createElement("td");
+                        td1.textContent = d.order_id;
+
+                        let td2 = document.createElement("td");
+                        td2.textContent = d.order_date.slice(0, 10);
+
+                        let td3 = document.createElement("td");
+                        td3.textContent = d.customer_name;
+
+                        let td4 = document.createElement("td");
+                        td4.textContent = d.customer_address;
+
+                        let td5 = document.createElement("td");
+                        td5.textContent = d.pincode;
+
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+                        tr.appendChild(td3);
+                        tr.appendChild(td4);
+                        tr.appendChild(td5);
+
+                        table.appendChild(tr);
+                    });
+
+                    table.style.display = "block";
+                    
+                }
+            } catch(err) {
+                alert("Internal error");
+            }
+        });
+    </script>
+</body>
+</html>
