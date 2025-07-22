@@ -1,4 +1,4 @@
-package Sem2.distributed_system_os.assignment5;
+package distributed_system_os.assignment5;
 
 import java.util.HashMap;
 import java.util.Map;

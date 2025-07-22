@@ -1,4 +1,4 @@
-package Sem2.distributed_system_os.assignment5;
+package distributed_system_os.assignment5;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +46,9 @@ public class Node implements Runnable {
                         " on channel " + msg.sender_id + "_" + msg.receiver_id
                         + " and it is the first marker message received in this node");
 
-                this.clock = (int) (Math.random() * 5 + 1);
-                this.state = "Local state is stored and clock: " + this.clock;
+                // this.clock = (int) (Math.random() * 5 + 1);
+                // this.state = "Local state is stored and clock: " + this.clock;
+                this.state = "Local state is stored";
                 this.snapshot_started = true;
 
                 System.out.println("For process " + this.id + ": " + this.state);

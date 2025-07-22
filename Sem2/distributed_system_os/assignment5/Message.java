@@ -1,4 +1,4 @@
-package Sem2.distributed_system_os.assignment5;
+package distributed_system_os.assignment5;
 
 public class Message {
     public int sender_id;
