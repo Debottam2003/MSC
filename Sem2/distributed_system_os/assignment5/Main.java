@@ -8,7 +8,7 @@ public class Main {
 
     public static Map<Integer, Node> nodeMap = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the No of nodes: ");
         int n = sc.nextInt();
@@ -46,7 +46,7 @@ public class Main {
             new Thread(node).start();
         }
 
-        // Start snap shot of the choosen node 
+        // Start snap shot of the choosen node
         Node startNode = nodeMap.get(0);
         startNode.snapshot_started = true;
         startNode.clock = (int) (Math.random() * 5 + 1);
@@ -59,11 +59,19 @@ public class Main {
                 Main.sendMessage(marker);
             }
         }
+
+        Thread.sleep(6000);
+        for (int i = 0; i < n; i++) {
+            System.out.println("Process: " + nodeMap.get(i).id);
+            System.out.println("Transmitted Messages: " + nodeMap.get(i).transmit);
+            System.out.println("State: " + nodeMap.get(i).stateData);
+        }
     }
 
     // Send marker message
     public static void sendMessage(Message msg) {
-        // System.out.println(marker.sender_id + " " + marker.message + " " + marker.receiver_id + " " +
+        // System.out.println(marker.sender_id + " " + marker.message + " " +
+        // marker.receiver_id + " " +
         // marker.is_marker);
         Node receiver = nodeMap.get(msg.receiver_id);
         if (receiver != null) {

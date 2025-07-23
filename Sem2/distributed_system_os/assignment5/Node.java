@@ -1,5 +1,6 @@
 package distributed_system_os.assignment5;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,9 @@ public class Node implements Runnable {
     public int total_nodes;
     public int[][] graph;
     public Map<Integer, String> channelData = new HashMap<>();
+    public ArrayList<Message> transmit = new ArrayList<>();
+    public ArrayList<Message> normalMessages  = new ArrayList<>();
+    public ArrayList<Message> stateData = new ArrayList<>();
 
     public Node(int id, int n, int[][] graph) {
         this.id = id;
@@ -27,7 +31,8 @@ public class Node implements Runnable {
                 Thread.sleep(500);
                 for (int j = 0; j < this.total_nodes; j++) {
                     if (this.id != j && this.graph[this.id][j] == 1) {
-                        Message msg = new Message(this.id, "This is a normal message", j, false);
+                        Message msg = new Message(this.id, " send a normal message to ", j, false);
+                        normalMessages.add(msg);
                         Main.sendMessage(msg);
                     }
                 }
@@ -49,6 +54,7 @@ public class Node implements Runnable {
                 // this.clock = (int) (Math.random() * 5 + 1);
                 // this.state = "Local state is stored and clock: " + this.clock;
                 this.state = "Local state is stored";
+                this.stateData = this.normalMessages;
                 this.snapshot_started = true;
 
                 System.out.println("For process " + this.id + ": " + this.state);
@@ -77,8 +83,11 @@ public class Node implements Runnable {
                 String ch = this.channelData.get(msg.sender_id);
                 if(this.snapshot_started) {
                     if( ch == null ) {
-                    System.out.println("Local snapshot is done on node " + this.id + " so this received message is stored as transit message on channel " + msg.sender_id + "_" + msg.receiver_id);
-                    }
+                    System.out.println("Local snapshot is already done on node " + this.id + " so this received message is stored as transit message on channel " + msg.sender_id + "_" + msg.receiver_id);
+                    this.transmit.add(msg);
+                }
+                } else {
+                    this.normalMessages.add(msg);
                 }
             }
         }

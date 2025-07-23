@@ -24,7 +24,7 @@ public class Main {
             if (!s.contains(j)) {
                 s.add(j);
                 arr.add(j);
-                System.out.println("Process " + i + " is created with ID: " + j + ", Public: " + j + " Private: " + j);
+                System.out.println("Process " + i + " is created with ID: " + i + ", Public: " + j + " Private: " + j);
                 nodesList.add(new Node(i, j));
                 i++;
             }
@@ -34,17 +34,6 @@ public class Main {
         }
 
         System.out.println("All nodes created successfully.");
-        // System.out.println(arr);
-        // Circle like graph manually 0 -> 1 -> 2 -> 0
-        // for (int index = 0; index < n; index++) {
-        // if (index < n - 1) {
-        // System.out.println("Process " + index + " --> " + "Process " + (index + 1));
-        // main.addEdge(nodesList.get(index), nodesList.get(index + 1));
-        // } else {
-        // System.out.println("Process " + (n - 1) + " --> " + "Process " + 0);
-        // main.addEdge(nodesList.get(n - 1), nodesList.get(0));
-        // }
-        // }
         System.out.println("Enter the total no of edges: ");
         int e = sc.nextInt();
         for (int index = 0; index < e; index++) {

@@ -12,4 +12,8 @@ public class Message {
         this.receiver_id = receiver_id;
         this.is_marker = is_marker;
     }
+
+    public String toString() {
+        return this.sender_id + this.message + this.receiver_id;
+    }
 }
