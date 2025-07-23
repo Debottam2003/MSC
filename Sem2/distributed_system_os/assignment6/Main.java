@@ -24,7 +24,7 @@ public class Main {
             if (!s.contains(j)) {
                 s.add(j);
                 arr.add(j);
-                System.out.println("Node " + i + " is created with ID: " + j);
+                System.out.println("Process " + i + " is created with ID: " + j + ", Public: " + j + " Private: " + j);
                 nodesList.add(new Node(i, j));
                 i++;
             }
@@ -48,7 +48,7 @@ public class Main {
         System.out.println("Enter the total no of edges: ");
         int e = sc.nextInt();
         for (int index = 0; index < e; index++) {
-            System.out.println("Enter the blocked process's id and blocking process's id for the edge one accordingly : " + " id <= " + (n - 1));
+            System.out.println("Enter the blocked process's id and blocking process's id accordingly : " + " id <= " + (n - 1));
             int x = sc.nextInt();
             int y = sc.nextInt();
             main.addEdge(nodesList.get(x), nodesList.get(y));
