@@ -1,94 +1,105 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
 
     public static HashSet<Integer> s = new HashSet<>();
     public static ArrayList<Integer> arr = new ArrayList<>();
     public static ArrayList<Node> nodesList = new ArrayList<>();
-    public static Main main = new Main();
+    public static int[][] graph;
+    public static int n;
 
     public static void main(String[] args) {
-        System.out.println("Mitchell Merritt DDD algorithm");
+        System.out.println("Mitchell Merritt DDD algorithm using Adjacency Matrix");
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter total no of nodes: ");
-        int n = sc.nextInt();
+
+        System.out.println("Enter total number of nodes: ");
+        n = sc.nextInt();
+        graph = new int[n][n]; // adjacency matrix
 
         Random rand = new Random();
-
         int i = 0;
-        while (true) {
+        while (i < n) {
             int j = rand.nextInt(2 * n) + 1;
             if (!s.contains(j)) {
                 s.add(j);
                 arr.add(j);
-                System.out.println("Process " + i + " is created with ID: " + i + ", Public: " + j + " Private: " + j);
+                System.out.println("Process " + i + " created with ID: " + i + ", Public: " + j + " Private: " + j);
                 nodesList.add(new Node(i, j));
                 i++;
-            }
-            if (i == n) {
-                break;
             }
         }
 
         System.out.println("All nodes created successfully.");
-        System.out.println("Enter the total no of edges: ");
+        System.out.println("Enter total number of edges: ");
         int e = sc.nextInt();
+
         for (int index = 0; index < e; index++) {
-            System.out.println("Enter the blocked process's id and blocking process's id accordingly : " + " id <= " + (n - 1));
-            int x = sc.nextInt();
-            int y = sc.nextInt();
-            main.addEdge(nodesList.get(x), nodesList.get(y));
+            System.out.println("Enter blocked process ID and blocking process ID (0 to " + (n - 1) + "):");
+            int x = sc.nextInt(); // blocked
+            int y = sc.nextInt(); // blocking
+
+            if (x < 0 || x >= n || y < 0 || y >= n) {
+                System.out.println("Invalid process IDs.");
+                index--;
+                continue;
+            }
+
+            if (graph[x][y] == 1) {
+                System.out.println("Edge already exists.");
+                continue;
+            }
+
+            graph[x][y] = 1;
+            addEdge(nodesList.get(x), nodesList.get(y));
+            deadlockDetection(x, y);
+
         }
+
         sc.close();
     }
 
-    public void addEdge(Node n, Node m) {
-        // n is the blocked process
-        // m is the blocking process
-        System.out.println("Process " + n.pid + " " + "Public: " + n.u + " Private: " + n.v);
-        System.out.println("Process " + m.pid + " " + "Public: " + m.u + " Private: " + m.v);
-        n.u = n.v = Math.max(n.u, m.u) + 1;
-        System.out.println("Process " + n.pid + " is the blocked process so the public and private value become: "
-                + "Public: " + n.u + " Private: " + n.v);
-        n.forwardedge = m;
-        m.backwardedge = n;
-        transmit(n);
-        deadlockDetection(n);
+    public static void addEdge(Node blocked, Node blocking) {
+        System.out.println("Blocked Process " + blocked.pid + " - Public: " + blocked.u + " Private: " + blocked.v);
+        System.out.println("Blocking Process " + blocking.pid + " - Public: " + blocking.u + " Private: " + blocking.v);
 
+        blocked.u = blocked.v = Math.max(blocked.u, blocking.u) + 1;
+        System.out.println(
+                "Updated Blocked Process " + blocked.pid + " => Public: " + blocked.u + " Private: " + blocked.v);
+
+        transmit(blocked);
     }
 
-    public void transmit(Node n) {
-        while (true) {
-            if (n.backwardedge != null && n.backwardedge.u < n.u) {
-                System.out.println("Blocked process Process " + n.backwardedge.pid + " has public value lesser than "
-                        + " blocking process Process" + n.pid
-                        + " so public value is transmitted in the reverse direction of the edge");
-                n.backwardedge.u = n.u;
-                System.out.println("After transmission Process " + n.backwardedge.pid + " has Public value: "
-                        + n.backwardedge.u + " and Private value: " + n.backwardedge.v);
-                n = n.backwardedge;
-                transmit(n);
-            } else {
-                return;
+    public static void transmit(Node node) {
+        for (int i = 0; i < n; i++) {
+            if (graph[i][node.pid] == 1) { // if process i is waiting on node
+                Node prev = nodesList.get(i);
+                if (prev.u < node.u) {
+                    System.out.println("Transmitting from Process " + node.pid + " to waiting Process " + prev.pid);
+                    prev.u = node.u;
+                    System.out.println("After transmission - Process " + prev.pid + " => Public: " + prev.u
+                            + " Private: " + prev.v);
+                    transmit(prev); // propagate further
+                }
             }
         }
     }
 
-    public void deadlockDetection(Node n) {
-        if (n.forwardedge.u == n.u && n.u == n.v) {
-            System.out.println("Blocked process Process " + n.pid + " has public value equal to private value "
-                    + "Public: " + n.u + " Private: " + n.v + " and "
-                    + "blocking process" + n.forwardedge.pid
-                    + " public value is same with blocked process" + n.pid + " public value and"
-                    + " Public: " + n.forwardedge.u
-                    + " Private: " + n.forwardedge.v);
-            System.out.println("Deadlock detected");
-            System.exit(1);
-        } else {
-            System.out.println("No Deadlock Detected");
+    public static void deadlockDetection(int x, int y) {
+        if (graph[x][y] == 1) {
+
+            Node blocked = nodesList.get(x);
+            Node blocking = nodesList.get(y);
+
+            if (blocked.u == blocked.v &&
+                    blocked.u == blocking.u) {
+                System.out.println("Deadlock Detected:");
+                System.out.println(
+                        "Blocked Process: " + blocked.pid + " => Public: " + blocked.u + " Private: " + blocked.v);
+                System.out.println(
+                        "Blocking Process: " + blocking.pid + " => Public: " + blocking.u + " Private: " + blocking.v);
+                System.exit(1);
+            }
         }
+        System.out.println("No Deadlock Detected.");
     }
 }
