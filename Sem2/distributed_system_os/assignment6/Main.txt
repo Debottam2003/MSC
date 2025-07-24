@@ -51,8 +51,6 @@ public class Main {
 
             graph[x][y] = 1;
             addEdge(nodesList.get(x), nodesList.get(y));
-            deadlockDetection(x, y);
-
         }
 
         sc.close();
@@ -63,10 +61,10 @@ public class Main {
         System.out.println("Blocking Process " + blocking.pid + " - Public: " + blocking.u + " Private: " + blocking.v);
 
         blocked.u = blocked.v = Math.max(blocked.u, blocking.u) + 1;
-        System.out.println(
-                "Updated Blocked Process " + blocked.pid + " => Public: " + blocked.u + " Private: " + blocked.v);
+        System.out.println("Updated Blocked Process " + blocked.pid + " => Public: " + blocked.u + " Private: " + blocked.v);
 
         transmit(blocked);
+        deadlockDetection();
     }
 
     public static void transmit(Node node) {
@@ -76,28 +74,30 @@ public class Main {
                 if (prev.u < node.u) {
                     System.out.println("Transmitting from Process " + node.pid + " to waiting Process " + prev.pid);
                     prev.u = node.u;
-                    System.out.println("After transmission - Process " + prev.pid + " => Public: " + prev.u
-                            + " Private: " + prev.v);
+                    System.out.println("After transmission - Process " + prev.pid + " => Public: " + prev.u + " Private: " + prev.v);
                     transmit(prev); // propagate further
                 }
             }
         }
     }
 
-    public static void deadlockDetection(int x, int y) {
-        if (graph[x][y] == 1) {
+    public static void deadlockDetection() {
+        for (int i = 0; i < n; i++) {
+            Node blocked = nodesList.get(i);
+            for (int j = 0; j < n; j++) {
+                if (graph[i][j] == 1) {
+                    Node blocking = nodesList.get(j);
 
-            Node blocked = nodesList.get(x);
-            Node blocking = nodesList.get(y);
+                    if (blocked.u == blocked.v &&
+                        blocked.u == blocking.u &&
+                        blocking.u == blocking.v) {
 
-            if (blocked.u == blocked.v &&
-                    blocked.u == blocking.u) {
-                System.out.println("Deadlock Detected:");
-                System.out.println(
-                        "Blocked Process: " + blocked.pid + " => Public: " + blocked.u + " Private: " + blocked.v);
-                System.out.println(
-                        "Blocking Process: " + blocking.pid + " => Public: " + blocking.u + " Private: " + blocking.v);
-                System.exit(1);
+                        System.out.println("Deadlock Detected:");
+                        System.out.println("Blocked Process: " + blocked.pid + " => Public: " + blocked.u + " Private: " + blocked.v);
+                        System.out.println("Blocking Process: " + blocking.pid + " => Public: " + blocking.u + " Private: " + blocking.v);
+                        System.exit(1);
+                    }
+                }
             }
         }
         System.out.println("No Deadlock Detected.");

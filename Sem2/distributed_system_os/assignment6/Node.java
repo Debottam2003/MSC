@@ -2,8 +2,6 @@ public class Node {
     public int pid;
     public int u;
     public int v;
-    public Node forwardedge = null;
-    public Node backwardedge = null;
 
     public Node(int pid, int num) {
         this.pid = pid;
