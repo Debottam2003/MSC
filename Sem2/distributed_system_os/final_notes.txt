@@ -25,7 +25,7 @@ Q. What are the disadvantages of Distributed System?
    4. Debugging and Testing: Identifying and fixing issues in a distributed system can be more challenging than in a centralized system.
 
 Q. What are the key characteristics of Distributed System?
--> 1. Transparency: The system should hide the complexity of the distributed nature from users and applications, making it appear as a single coherent system.
+->  1. Transparency: The system should hide the complexity of the distributed nature from users and applications, making it appear as a single coherent system.
     2. Scalability: The system should be able to handle an increasing number of nodes and users without significant performance degradation.
     3. Fault Tolerance: The system should continue to operate even if some nodes fail, ensuring high availability.
     4. Resource Sharing: Nodes should be able to share resources such as data, processing power, and storage efficiently.
