@@ -1,0 +1,1 @@
+select userid, marks from marks limit 100;

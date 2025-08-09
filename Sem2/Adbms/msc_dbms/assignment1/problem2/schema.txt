@@ -1,0 +1,92 @@
+-- 1. authors
+
+--     Attributes:
+--     id, email, password, firstname, lastname
+
+--     Primary Key:
+--     email
+
+-- 2. reviewers
+
+--     Attributes:
+--     id, email, password, firstname, lastname, phonenumber, affiliation
+
+--     Primary Key:
+--     email
+
+-- 3. interest
+
+--     Attributes:
+--     reviewer_email, topic
+
+--     Foreign Key:
+--     reviewer_email → reviewers(email)
+--     (with ON DELETE CASCADE ON UPDATE CASCADE)
+
+-- 4. papers
+
+--     Attributes:
+--     paper_id, contact_author, name, title, abstract, filename
+
+--     Primary Key:
+--     paper_id
+
+--     Foreign Key:
+--     contact_author → authors(email)
+--     (with ON DELETE CASCADE ON UPDATE CASCADE)
+
+-- 5. rattings
+
+--     Attributes:
+--     ratting_id, reviewer_email, paper_id, technical_merit, readibility, originality, relevance
+
+--     Primary Key:
+--     ratting_id
+
+--     Foreign Keys:
+
+--         reviewer_email → reviewers(email)
+
+--         paper_id → papers(paper_id)
+--         (Both with ON DELETE CASCADE ON UPDATE CASCADE)
+
+-- 6. reviews
+
+--     Attributes:
+--     reviewer_email, paper_id, ratting_id, feedback, comment
+
+--     Foreign Keys:
+
+--         reviewer_email → reviewers(email)
+
+--         paper_id → papers(paper_id)
+
+--         ratting_id → rattings(ratting_id)
+--         (All with ON DELETE CASCADE ON UPDATE CASCADE)
+
+-- 7. papers_assigned
+
+--     Attributes:
+--     reviewer_email, paper_id
+
+--     Foreign Keys:
+
+--         reviewer_email → reviewers(email)
+
+--         paper_id → papers(paper_id)
+--         (Both with ON DELETE CASCADE ON UPDATE CASCADE)
+
+-- 8. papers_authors
+
+--     Attributes:
+--     paper_id, author_email
+
+--     Foreign Keys:
+
+--         author_email → authors(email)
+
+--         paper_id → papers(paper_id)
+--         (Both with ON DELETE CASCADE ON UPDATE CASCADE)
+
+-- 9. admins
+--    id, email, password, firstname, lastname
