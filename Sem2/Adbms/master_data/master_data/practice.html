@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/saveorder" method="POST">
+    <div id="container"></div>
+    <button id="new" type="button">Add Item</button>
+    <button type="submit">PlaceOrder</button>
+    </form>
+    <script>
+        let items = [ "biriyani", "pizza", "burger", "pasta", "salad" ];
+        let container = document.getElementById("container");
+        function addFoodChoice() {
+            let div = document.createElement("div");
+            let select = document.createElement("select");
+            select.name = "items";
+            for(let i of items) {
+                let option = document.createElement("option");
+                option.value = i;
+                option.textContent = i;
+                select.appendChild(option);
+            }
+            div.appendChild(select);
+            let quantity = document.createElement("input");
+            quantity.type = "number";
+            quantity.min = 1;
+            quantity.value = 1;
+            // quantity.setAttribute("value", 1);
+            quantity.required = true;
+            quantity.name = "quantity";
+            div.appendChild(quantity);
+            container.appendChild(div);
+        }
+        let btn = document.getElementById("new");
+        btn.addEventListener("click", (ev) => {
+            // alert("hi");
+            // ev.preventDefault();
+            addFoodChoice();
+        });
+        
+    </script>
+</body>
+</html>
