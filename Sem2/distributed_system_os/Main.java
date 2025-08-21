@@ -48,7 +48,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Reaching all nodes of a connected Graph!");
-        String filePath = "./Sem2/distributed_system_os/input.txt";
+        String filePath = "./distributed_system_os/input.txt";
         String data = "";
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
@@ -93,10 +93,10 @@ public class Main {
             }
             System.out.println();
         }
-        FileWriter writer = new FileWriter("./sem2/distributed_system_os/output.txt"); // Creates or overwrites the file
+        FileWriter writer = new FileWriter("./distributed_system_os/output.txt"); // Creates or overwrites the file
         writer.write("");
         writer.close();
-        writer = new FileWriter("./sem2/distributed_system_os/output.txt", true);
+        writer = new FileWriter("./distributed_system_os/output.txt", true);
         /* Using DFS */
         // for (int i = 0; i < n; i++) {
         // counter = 0;
