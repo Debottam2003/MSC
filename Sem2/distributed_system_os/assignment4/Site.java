@@ -142,6 +142,7 @@ public class Site implements Runnable {
                     this.holder.receiveToken();
                 } else {
                     this.token = false;
+                    this.request_send = true;
                     this.holder.receiveTokenWithReq(this);
                 }
             } else {
