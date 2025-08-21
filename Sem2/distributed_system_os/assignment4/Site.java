@@ -59,9 +59,9 @@ public class Site implements Runnable {
                 this.request_q.offer(site);
             } else if (!this.token && !this.request_send) {
                 this.request_q.offer(site);
-                if (this != site) {
+                // if (this != site) {
                     this.holder.receiveTokenRequest(this);
-                }
+                // }
             }
         }
     }
