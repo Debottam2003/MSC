@@ -1,0 +1,32 @@
+✔️ DIANA – Simple Step-by-Step Algorithm
+
+1️⃣ Start with all objects in one cluster.
+
+2️⃣ Select the object with the largest average distance to all others.
+→ This object starts a new splinter cluster S.
+
+3️⃣ Put all other objects into the remainder cluster R.
+
+4️⃣ For each object in R:
+
+Compare how close it is to R vs. to S.
+
+If the object is more similar to S than to R,
+→ Move it from R → S.
+
+5️⃣ Repeat Step 4 until no more objects want to move.
+
+6️⃣ Now you have two clusters: S and R.
+→ This is the split for this level.
+
+7️⃣ Apply DIANA again (recursively) to each cluster with more than 1 object:
+
+Repeat steps 2–6 independently on S
+
+Repeat steps 2–6 independently on R
+
+8️⃣ Continue until all clusters contain one object (or desired number of clusters reached).
+
+🔍 Quick Summary in One Line
+
+Always find the most dissimilar item, let it form a new group, then keep moving items into that group if they fit better there — repeat for each resulting subgroup.
