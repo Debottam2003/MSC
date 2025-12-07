@@ -1,0 +1,109 @@
+| Time ⏱️         | Slot 1 | Slot 2 | Slot 3 |
+| --------------- | ------ | ------ | ------ |
+| Subcarrier 1 📡 | User A | User C | User B |
+| Subcarrier 2 📡 | User B | User A | User A |
+| Subcarrier 3 📡 | User C | User B | User C |
+
+For 20 MHz LTE:
+
+Subcarrier spacing = 15 kHz
+
+Effective bandwidth ≈ 18 MHz (after guard bands)
+
+18MHz/15kHz≈1200 subcarriers
+
+➡️ That’s 1200 data channels in parallel
+
+1 subcarrier = very low data rate (few kbps)
+
+A typical user might use 100+ subcarriers at a time
+
+So with 1200 total:
+
+If every user needs 100 → about 12 users at max speed
+
+Why higher frequency has poor range?
+Higher frequency⇒Shorter wavelength
+
+Shorter wavelength:
+
+Gets absorbed more by buildings, trees, air
+
+Cannot bend around obstacles well
+
+Needs many more towers / small cells
+
+Example Approx:
+
+| Band      | Wavelength | Coverage   | Use                |
+| --------- | ---------- | ---------- | ------------------ |
+| 700 MHz   | ~40 cm     | Large area | Rural LTE/5G       |
+| 3.5 GHz   | ~8 cm      | Medium     | 5G sub-6 (cities)  |
+| 26–28 GHz | ~1 cm      | Very short | 5G mmWave hotspots |
+
+📡 Bandwidth → Subcarriers → Speed
+Example:
+
+| Spectrum              | Bandwidth           | Subcarriers  |
+| --------------------- | ------------------- | ------------ |
+| 20 MHz (4G LTE)       | ~1200 subcarriers   | Few 100 Mbps |
+| 100 MHz (5G mid band) | ~6000 subcarriers   | 1–3 Gbps     |
+| 1 GHz (5G mmWave)     | ~60,000 subcarriers | 5–10+ Gbps   |
+
+| Band               | Example     | Speed        | Range         | Notes           |
+| ------------------ | ----------- | ------------ | ------------- | --------------- |
+| Low-band           | 700–900 MHz | 🐢 Low       | 🟢 Long       | Rural coverage  |
+| Mid-band           | 2.3–3.5 GHz | ⚡ Fast       | 🟡 Medium     | Best 5G balance |
+| High-band (mmWave) | 26–28 GHz   | 🚀 Very Fast | 🔴 Very short | Hotspots only   |
+
+***
+When you select a Wi-Fi channel (e.g., channel 6 in the 2.4 GHz band), 
+you are designating a specific set of frequencies for your data transmission. 
+The center frequency for channel 6 is 2.437 GHz (or 2437 MHz).
+The 20 MHz bandwidth means your signal occupies the frequencies from approximately 2.427 GHz up to 2.447 GHz 
+(i.e., 10 MHz below to 10 MHz above the center).
+
+If the system is designed to vary the signal across a 20 MHz range 
+(e.g., between 2.427 GHz and 2.447 GHz), its bandwidth is 20 MHz.
+
+If the system varies the signal across a 40 MHz range, its bandwidth is 40 MHz, 
+allowing for faster variations and thus more data.
+
+The signal begins operating precisely at 2.427 GHz (the bottom edge of the window).
+It simultaneously uses every frequency up to 2.447 GHz (the top edge of the window).
+
+-----------------------------------------------------------------------------------------------------
+Your Phone Generates a Signal: Your phone modulates data onto an entirely different carrier frequency (e.g., 2.1 GHz).
+It Uses Bandwidth: Just like the tower, your phone uses a specific bandwidth (e.g., 20 MHz wide) to transmit its signal, which again contains many subcarriers.
+Simultaneous Operation: Because the uplink and downlink are using separate frequencies, they can both transmit at the same time without interfering with each other. 
+This is called Frequency Division Duplexing (FDD).
+
+Here are 5 key reasons why systems like 4G LTE do not use 10,000 narrow 2 kHz subcarriers 
+instead of the standard 1200 wider 15 kHz subcarriers:
+
+Reasons Not to Use Very Narrow Subcarriers:
+
+Increased Processing Power Requirements: Managing 10,000 separate frequencies simultaneously 
+requires significantly more complex hardware and processing power in both the cell tower and 
+your mobile device, making the devices more expensive and less efficient.
+
+Higher Signaling Overhead: More narrow subcarriers mean more management data (control signaling) 
+needs to be sent just to tell every device which frequency to use. This "overhead" takes up valuable 
+bandwidth, reducing the space available for the actual user data.
+    
+Vulnerability to the Doppler Effect (Movement): Narrow subcarriers are extremely sensitive to frequency 
+shifts caused by movement. If you are in a moving car, the slight shift in the wave frequency would cause 
+adjacent narrow subcarriers to overlap, leading to significant interference and dropped data.
+
+Susceptibility to Phase Noise: Internal electronic noise within the router or phone itself 
+(called phase noise) affects narrow signals more severely. The wider 15 kHz spacing is more 
+robust and tolerant of this inherent electronic noise.
+   
+Lack of Standardization: Wireless standards like 4G LTE rely on universally agreed-upon parameters 
+(like 15 kHz spacing) so that any phone can talk to any tower. Changing this fundamental parameter 
+would break global interoperability.
+
+User1 and User2 are hit by the same radio waves,
+but only the intended device with valid keys can process the data.
+
+Every devices are strucked by the radio waves but it only handle the radio waves that are meant for that device.
