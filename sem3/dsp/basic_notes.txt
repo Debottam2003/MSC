@@ -1,0 +1,30 @@
+Amplitude:
+----------
+Maximum height above or below from the mean position.
+Unit: SI unit meter
+
+Wave Length:
+------------
+Wavelength (λ) is the distance between two consecutive peaks (or troughs) of the wave.
+A single air particle's oscillation gives you an A vs. T graph (Amplitude vs. Time).
+When you look at multiple particles across space, you can create a wave and measure the distance between similar oscillations (like from peak to peak).
+This distance is the wavelength.
+
+Frequency:
+----------
+How many oscillations the particle completes in one second.
+
+Period:
+-------
+The period (T) is the time it takes for the particle to complete one full oscillation (back and forth).
+
+v = f * 𝜆	​
+Where:
+λ = wavelength (meters)
+v = wave speed (m/s)
+f = frequency (Hz)
+
+Bandwidth:
+----------
+Bandwidth is commonly used to refer to the maximum rate at which data can be sent or received over a network.
+
