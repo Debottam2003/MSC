@@ -1,0 +1,22 @@
+raw_dataset = [
+    {"individual": 1,  "x": 1.0, "y": 1.0},
+    {"individual": 2,  "x": 1.5, "y": 2.0},
+    {"individual": 3,  "x": 2.0, "y": 1.5},
+    {"individual": 4,  "x": 1.8, "y": 2.2},
+    {"individual": 5,  "x": 2.5, "y": 2.0},
+    {"individual": 6,  "x": 2.2, "y": 1.8},
+    {"individual": 7,  "x": 3.0, "y": 4.0},
+    {"individual": 8,  "x": 3.5, "y": 4.5},
+    {"individual": 9,  "x": 3.2, "y": 3.8},
+    {"individual": 10, "x": 4.0, "y": 4.2},
+    {"individual": 11, "x": 3.8, "y": 4.8},
+    {"individual": 12, "x": 4.5, "y": 5.0},
+    {"individual": 13, "x": 5.0, "y": 5.5},
+    {"individual": 14, "x": 5.2, "y": 6.0},
+    {"individual": 15, "x": 4.8, "y": 5.8},
+    {"individual": 16, "x": 5.5, "y": 6.5},
+    {"individual": 17, "x": 6.0, "y": 7.0},
+    {"individual": 18, "x": 5.8, "y": 6.8},
+    {"individual": 19, "x": 6.2, "y": 7.2},
+    {"individual": 20, "x": 6.5, "y": 7.5}
+]
